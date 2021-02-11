@@ -52,3 +52,13 @@ nav ul li ul li a:hover {
   background: #ebebeb;
   border-left: 4px solid #3498db;
 }
+
+.icon {
+  height: 30px;
+  width: 30px;
+}
+
+.small-icon {
+  height: 25px;
+  width: 25px;
+}

@@ -1,29 +1,24 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import "./style.css";
+import ButtonWithIcon from "../ButtonWithIcon";
 
 export class VerticalMenu extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      windMenu: false,
-      precipitationMenu: false,
-    };
-
-    this.windMenu = this.windMenu.bind(this);
-    this.precipitationMenu = this.precipitationMenu.bind(this);
-  }
+  state = {
+    windMenu: false,
+    valprecipitationMenuue: false
+  };
 
   windMenu(event) {
     event.preventDefault();
 
     if (!this.state.windMenu) {
       this.setState({
-        windMenu: true,
+        windMenu: true
       });
     } else {
       this.setState({
-        windMenu: false,
+        windMenu: false
       });
     }
   }
@@ -33,111 +28,122 @@ export class VerticalMenu extends Component {
 
     if (!this.state.precipitationMenu) {
       this.setState({
-        precipitationMenu: true,
+        precipitationMenu: true
       });
     } else {
       this.setState({
-        precipitationMenu: false,
+        precipitationMenu: false
       });
     }
   }
 
   render() {
     return (
-      <div class="menu">
-        <nav class="animated bounceInDown">
+      <div className="menu">
+        <nav className="animated bounceInDown">
           <ul>
-            <li>
-              <a href="#profile">
-                <img class="icon" alt="temperature" src="data/sun.svg" />{" "}
-                Temperatura
-              </a>
-            </li>
-            <li>
-              <a href="#profile" id="satellite">
-                <img class="icon" alt="satellite" src="data/satellite.svg" />{" "}
-                Satelite
-              </a>
-            </li>
-            <li>
-              <a href="#profile" id="radar">
-                <img class="icon" alt="radar" src="data/radar.svg" /> Radar
-              </a>
-            </li>
-            <li id="wind" class="sub-menu">
+            <ButtonWithIcon
+              alt="temperature"
+              iconSize="icon"
+              id="temperature"
+              name="Temperatura"
+              src="assets/sun.svg"
+            />
+            <ButtonWithIcon
+              alt="satellite"
+              iconSize="icon"
+              id="satellite"
+              name="Satelite"
+              src="assets/satellite.svg"
+            />
+            <ButtonWithIcon
+              alt="radar"
+              iconSize="icon"
+              id="radar"
+              name="Radar"
+              src="assets/radar.svg"
+            />
+            <li id="wind" className="sub-menu">
               <a href="#home" onClick={this.windMenu}>
-                <img class="icon" alt="wind" src="data/cloud.svg" /> Vento
+                <img className="icon" alt="wind" src="assets/cloud.svg" /> Vento
               </a>
               {this.state.windMenu ? (
                 <ul>
                   <li>
                     <a href="#home" id="global">
-                      <img class="small-icon" alt="globe" src="data/wind.svg" />{" "}
+                      <img
+                        className="small-icon"
+                        alt="globe"
+                        src="assets/wind.svg"
+                      />{" "}
                       Globo
                     </a>
                   </li>
                   <li>
                     <a href="#home" id="australia">
                       <img
-                        class="small-icon"
+                        className="small-icon"
                         alt="australia"
-                        src="data/wind.svg"
+                        src="assets/wind.svg"
                       />{" "}
                       Australia
                     </a>
                   </li>
                   <li>
                     <a href="#home" id="south">
-                      <img class="small-icon" alt="south" src="data/wind.svg" />{" "}
+                      <img
+                        className="small-icon"
+                        alt="south"
+                        src="assets/wind.svg"
+                      />{" "}
                       Sul / Sudeste
                     </a>
                   </li>
                   <li>
                     <a href="#home" id="test">
-                      <img class="small-icon" alt="test" src="data/wind.svg" />{" "}
+                      <img
+                        className="small-icon"
+                        alt="test"
+                        src="assets/wind.svg"
+                      />{" "}
                       Teste
                     </a>
                   </li>
                 </ul>
               ) : null}
             </li>
-            <li class="sub-menu">
+            <li className="sub-menu">
               <a href="#home" onClick={this.precipitationMenu}>
-                <img class="icon" alt="precipitation" src="data/rain.svg" />{" "}
+                <img
+                  className="icon"
+                  alt="precipitation"
+                  src="assets/rain.svg"
+                />{" "}
                 Precipitação
               </a>
               {this.state.precipitationMenu ? (
                 <ul>
-                  <li>
-                    <a href="#home" id="global">
-                      <img
-                        class="small-icon"
-                        alt="rain"
-                        src="data/wi-raindrop.svg"
-                      />
-                      Precipitação
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#home" id="australia">
-                      <img
-                        class="small-icon"
-                        alt="precipitation-convection"
-                        src="data/wi-raindrop.svg"
-                      />
-                      Precipitação Convectiva
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#home" id="australia">
-                      <img
-                        class="small-icon"
-                        alt="precipitation-non-convection"
-                        src="data/wi-raindrop.svg"
-                      />
-                      Precipitação Não Convectiva
-                    </a>
-                  </li>
+                  <ButtonWithIcon
+                    alt="indefinido"
+                    iconSize="icon"
+                    id="indefinido"
+                    name="Precipitação"
+                    src="assets/wi-raindrop.svg"
+                  />
+                  <ButtonWithIcon
+                    alt="indefinido"
+                    iconSize="icon"
+                    id="indefinido"
+                    name="Precipitação Não Convectiva"
+                    src="assets/wi-raindrop.svg"
+                  />
+                  <ButtonWithIcon
+                    alt="australia"
+                    iconSize="icon"
+                    id="australia"
+                    name="Precipitação Convectiva"
+                    src="assets/wi-raindrop.svg"
+                  />
                 </ul>
               ) : null}
             </li>

@@ -1,11 +1,13 @@
 import "./App.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import VerticalMenu from "./components/VerticalMenu";
+import HorizontalMenu from "./components/HorizontalMenu";
 
 function App() {
   return (
     <div>
       <VerticalMenu />
+      <HorizontalMenu />
       <MapContainer
         style={{ height: "50vh", width: "50vh" }}
         center={[51.505, -0.09]}
