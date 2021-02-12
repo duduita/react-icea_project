@@ -4,7 +4,7 @@ export class ButtonWithIcon extends Component {
   render() {
     return (
       <li>
-        <a id={this.props.id} href="#home">
+        <a id={this.props.id} href="#home" onClick={this.props.onClick}>
           <img
             alt={this.props.alt}
             className={this.props.iconSize}

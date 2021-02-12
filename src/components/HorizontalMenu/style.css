@@ -1,22 +1,21 @@
 .bottom {
-  display: flex;
-  justify-items: center;
-  align-items: center;
   position: absolute;
   padding-left: 30px;
   padding-right: 30px;
-  bottom: 30px;
+  bottom: 10px;
   width: 100%;
   z-index: 10000;
 }
 
 .scale {
   position: absolute;
-  padding-left: 130px;
+  top: 62px;
   padding-right: 30px;
-  bottom: 0px;
   width: 100%;
   z-index: 10000;
+}
+
+.submenu {
 }
 
 td {
@@ -37,6 +36,14 @@ td {
   width: 100%;
   justify-items: center;
   align-items: center;
+}
+
+.thead > tr {
+}
+
+.table {
+}
+.date {
 }
 
 .date-item {

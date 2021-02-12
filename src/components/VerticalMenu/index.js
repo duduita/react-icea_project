@@ -46,6 +46,7 @@ class VerticalMenu extends Component {
                     iconSize="small-icon"
                     id="globe"
                     name="Globo"
+                    onClick={e => this.props.ToggleLayer("global")}
                     src="assets/wind.svg"
                   />
                   <ButtonWithIcon
@@ -123,7 +124,8 @@ class VerticalMenu extends Component {
 const mapStateToProps = state => {
   return {
     windMenu: state.windMenu,
-    precipitationMenu: state.precipitationMenu
+    precipitationMenu: state.precipitationMenu,
+    layerVisible: state.layerVisible
   };
 };
 
@@ -134,6 +136,9 @@ const mapDispatchToProps = dispatch => {
     },
     TogglePrecipitation: e => {
       dispatch({ type: "TOGGLEPRECIPITATION", payLoad: e });
+    },
+    ToggleLayer: e => {
+      dispatch({ type: "TOGGLELAYER", payLoad: e });
     }
   };
 };

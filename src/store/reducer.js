@@ -1,7 +1,8 @@
 const initialState = {
   windMenu: false,
   precipitationMenu: false,
-  date: 1
+  date: 1,
+  layerVisible: "global"
 };
 
 const reducer = (state = initialState, action) => {
@@ -35,6 +36,12 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       date: action.payLoad
+    };
+  }
+  if (action.type === "TOGGLELAYER") {
+    return {
+      ...state,
+      layerVisible: action.payLoad
     };
   }
   return state;

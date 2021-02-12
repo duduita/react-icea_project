@@ -16,8 +16,8 @@ class HorizontalMenu extends Component {
 
   render() {
     return (
-      <div>
-        <div className="bottom">
+      <div className="bottom">
+        <div className="submenu">
           <div className="options">
             <button className="btn btn-primary play-button" type="submit">
               <span id="play" className="glyphicon play glyphicon-play" />
@@ -44,7 +44,7 @@ class HorizontalMenu extends Component {
         </div>
         <div className="scale">
           <table id="date-line" className="table table-borderless">
-            <thead>
+            <thead className="thead">
               <tr className="date">
                 <td
                   id="date-1"
