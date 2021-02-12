@@ -1,7 +1,19 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import "./style.css";
 
-export class HorizontalMenu extends Component {
+class HorizontalMenu extends Component {
+  componentDidMount() {
+    const futureDays = new Date();
+    var weekDays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+    for (var i = 1; i <= 6; i++) {
+      futureDays.setDate(new Date().getDate() + i - 1);
+      document.getElementById(`date-${i}`).innerHTML = `${
+        weekDays[futureDays.getDay()]
+      } ${futureDays.getDate()}`;
+    }
+  }
+
   render() {
     return (
       <div>
@@ -22,7 +34,7 @@ export class HorizontalMenu extends Component {
                 className="progress-bar"
                 role="progressbar"
                 style={{
-                  width: "16.66%",
+                  width: `${this.props.date * 16.66}%`,
                   height: "6px ",
                   backgroundColor: "#e5e5e5"
                 }}
@@ -34,12 +46,42 @@ export class HorizontalMenu extends Component {
           <table id="date-line" className="table table-borderless">
             <thead>
               <tr className="date">
-                <td id="date-1" className="date-item" scope="col" />
-                <td id="date-2" className="date-item" scope="col" />
-                <td id="date-3" className="date-item" scope="col" />
-                <td id="date-4" className="date-item" scope="col" />
-                <td id="date-5" className="date-item" scope="col" />
-                <td id="date-6" className="date-item" scope="col" />
+                <td
+                  id="date-1"
+                  className="date-item"
+                  onClick={e => this.props.ChangeDate(1)}
+                  scope="col"
+                />
+                <td
+                  id="date-2"
+                  className="date-item"
+                  onClick={e => this.props.ChangeDate(2)}
+                  scope="col"
+                />
+                <td
+                  id="date-3"
+                  className="date-item"
+                  onClick={e => this.props.ChangeDate(3)}
+                  scope="col"
+                />
+                <td
+                  id="date-4"
+                  className="date-item"
+                  onClick={e => this.props.ChangeDate(4)}
+                  scope="col"
+                />
+                <td
+                  id="date-5"
+                  className="date-item"
+                  onClick={e => this.props.ChangeDate(5)}
+                  scope="col"
+                />
+                <td
+                  id="date-6"
+                  className="date-item"
+                  onClick={e => this.props.ChangeDate(6)}
+                  scope="col"
+                />
               </tr>
             </thead>
           </table>
@@ -49,4 +91,21 @@ export class HorizontalMenu extends Component {
   }
 }
 
-export default HorizontalMenu;
+const mapStateToProps = state => {
+  return {
+    date: state.date
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    ChangeDate: e => {
+      dispatch({ type: "CHANGEDATE", payLoad: e });
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HorizontalMenu);

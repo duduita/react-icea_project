@@ -3,40 +3,7 @@ import { connect } from "react-redux";
 import "./style.css";
 import ButtonWithIcon from "../ButtonWithIcon";
 
-export class VerticalMenu extends Component {
-  state = {
-    windMenu: false,
-    valprecipitationMenuue: false
-  };
-
-  windMenu(event) {
-    event.preventDefault();
-
-    if (!this.state.windMenu) {
-      this.setState({
-        windMenu: true
-      });
-    } else {
-      this.setState({
-        windMenu: false
-      });
-    }
-  }
-
-  precipitationMenu(event) {
-    event.preventDefault();
-
-    if (!this.state.precipitationMenu) {
-      this.setState({
-        precipitationMenu: true
-      });
-    } else {
-      this.setState({
-        precipitationMenu: false
-      });
-    }
-  }
-
+class VerticalMenu extends Component {
   render() {
     return (
       <div className="menu">
@@ -64,56 +31,55 @@ export class VerticalMenu extends Component {
               src="assets/radar.svg"
             />
             <li id="wind" className="sub-menu">
-              <a href="#home" onClick={this.windMenu}>
+              <a
+                href="#home"
+                onClick={e => {
+                  this.props.ToggleWind(this.props.windMenu);
+                }}
+              >
                 <img className="icon" alt="wind" src="assets/cloud.svg" /> Vento
               </a>
-              {this.state.windMenu ? (
+              {this.props.windMenu ? (
                 <ul>
-                  <li>
-                    <a href="#home" id="global">
-                      <img
-                        className="small-icon"
-                        alt="globe"
-                        src="assets/wind.svg"
-                      />{" "}
-                      Globo
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#home" id="australia">
-                      <img
-                        className="small-icon"
-                        alt="australia"
-                        src="assets/wind.svg"
-                      />{" "}
-                      Australia
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#home" id="south">
-                      <img
-                        className="small-icon"
-                        alt="south"
-                        src="assets/wind.svg"
-                      />{" "}
-                      Sul / Sudeste
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#home" id="test">
-                      <img
-                        className="small-icon"
-                        alt="test"
-                        src="assets/wind.svg"
-                      />{" "}
-                      Teste
-                    </a>
-                  </li>
+                  <ButtonWithIcon
+                    alt="globe"
+                    iconSize="small-icon"
+                    id="globe"
+                    name="Globo"
+                    src="assets/wind.svg"
+                  />
+                  <ButtonWithIcon
+                    alt="australia"
+                    iconSize="small-icon"
+                    id="australia"
+                    name="Australia"
+                    src="assets/wind.svg"
+                  />
+                  <ButtonWithIcon
+                    alt="south"
+                    iconSize="small-icon"
+                    id="south"
+                    name="Sul / Sudeste"
+                    src="assets/wind.svg"
+                  />
+                  <ButtonWithIcon
+                    alt="test"
+                    iconSize="small-icon"
+                    id="test"
+                    name="Teste"
+                    src="assets/wind.svg"
+                  />
                 </ul>
               ) : null}
             </li>
             <li className="sub-menu">
-              <a href="#home" onClick={this.precipitationMenu}>
+              <a
+                href="#home"
+                onClick={e =>
+                  this.props.TogglePrecipitation(this.props.precipitationMenu)
+                }
+              >
+                {" "}
                 <img
                   className="icon"
                   alt="precipitation"
@@ -121,7 +87,7 @@ export class VerticalMenu extends Component {
                 />{" "}
                 Precipitação
               </a>
-              {this.state.precipitationMenu ? (
+              {this.props.precipitationMenu ? (
                 <ul>
                   <ButtonWithIcon
                     alt="indefinido"
@@ -154,4 +120,25 @@ export class VerticalMenu extends Component {
   }
 }
 
-export default VerticalMenu;
+const mapStateToProps = state => {
+  return {
+    windMenu: state.windMenu,
+    precipitationMenu: state.precipitationMenu
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    ToggleWind: e => {
+      dispatch({ type: "TOGGLEWIND", payLoad: e });
+    },
+    TogglePrecipitation: e => {
+      dispatch({ type: "TOGGLEPRECIPITATION", payLoad: e });
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(VerticalMenu);

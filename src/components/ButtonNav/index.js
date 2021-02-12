@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export class ButtonWithIcon extends Component {
+export class ButtonNav extends Component {
   render() {
     return (
       <li>
@@ -12,9 +12,9 @@ export class ButtonWithIcon extends Component {
           />
           {this.props.name}
         </a>
+        {this.props.children}
       </li>
     );
   }
 }
-
-export default ButtonWithIcon;
+export default ButtonNav;

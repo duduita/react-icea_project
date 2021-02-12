@@ -1,29 +1,40 @@
 const initialState = {
-  counter: 0
+  windMenu: false,
+  precipitationMenu: false,
+  date: 1
 };
 
 const reducer = (state = initialState, action) => {
-  if (action.type === "SUBTRACTION") {
-    return {
-      counter: state.counter - parseFloat(action.payLoad)
-    };
+  if (action.type === "TOGGLEWIND") {
+    if (!action.payLoad) {
+      return {
+        ...state,
+        windMenu: true
+      };
+    } else {
+      return {
+        ...state,
+        windMenu: false
+      };
+    }
   }
-  if (action.type === "SUM") {
+  if (action.type === "TOGGLEPRECIPITATION") {
+    if (!action.payLoad) {
+      return {
+        ...state,
+        precipitationMenu: true
+      };
+    } else {
+      return {
+        ...state,
+        precipitationMenu: false
+      };
+    }
+  }
+  if (action.type === "CHANGEDATE") {
     return {
       ...state,
-      counter: state.counter + parseFloat(action.payLoad)
-    };
-  }
-  if (action.type === "DIVISION") {
-    return {
-      ...state,
-      counter: state.counter / parseFloat(action.payLoad)
-    };
-  }
-  if (action.type === "MULTIPLICATION") {
-    return {
-      ...state,
-      counter: state.counter * parseFloat(action.payLoad)
+      date: action.payLoad
     };
   }
   return state;
