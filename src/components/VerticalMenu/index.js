@@ -1,32 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import "./style.css";
-import { useLeafletContext } from "@react-leaflet/core";
-import L from "leaflet";
+
 import ButtonWithIcon from "../ButtonWithIcon";
 
 const VerticalMenu = (props) => {
-  const Square = (props) => {
-    const context = useLeafletContext();
-    const bounds = L.latLng(props.center).toBounds(props.size);
-    const square = new L.Rectangle(bounds);
-    const container = context.layerContainer || context.map;
-    useEffect(() => {
-      alert(props.windMenu);
-      if (props.windMenu) {
-        container.addLayer(square);
-      } else {
-        container.removeLayer(square);
-      }
-    });
-
-    return null;
-  };
   return (
     <div className="menu">
       <nav className="animated bounceInDown">
         <ul>
-          <Square center={[51.505, -0.09]} size={1000000} />
           <ButtonWithIcon
             alt="temperature"
             iconSize="icon"
