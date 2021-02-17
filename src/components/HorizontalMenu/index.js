@@ -24,19 +24,13 @@ class HorizontalMenu extends Component {
             </button>
           </div>
           <div className="bar">
-            <div
-              id="bar-field"
-              className="progress"
-              style={{ height: "6px", backgroundColor: "#4c4949" }}
-            >
+            <div id="bar-field" className="progress">
               <div
                 id="p-bar"
                 className="progress-bar"
                 role="progressbar"
                 style={{
                   width: `${this.props.date * 16.66}%`,
-                  height: "6px ",
-                  backgroundColor: "#e5e5e5"
                 }}
               />
             </div>
@@ -49,38 +43,32 @@ class HorizontalMenu extends Component {
                 <td
                   id="date-1"
                   className="date-item"
-                  onClick={e => this.props.ChangeDate(1)}
-                  scope="col"
+                  onClick={(e) => this.props.ChangeDate(1)}
                 />
                 <td
                   id="date-2"
                   className="date-item"
-                  onClick={e => this.props.ChangeDate(2)}
-                  scope="col"
+                  onClick={(e) => this.props.ChangeDate(2)}
                 />
                 <td
                   id="date-3"
                   className="date-item"
-                  onClick={e => this.props.ChangeDate(3)}
-                  scope="col"
+                  onClick={(e) => this.props.ChangeDate(3)}
                 />
                 <td
                   id="date-4"
                   className="date-item"
-                  onClick={e => this.props.ChangeDate(4)}
-                  scope="col"
+                  onClick={(e) => this.props.ChangeDate(4)}
                 />
                 <td
                   id="date-5"
                   className="date-item"
-                  onClick={e => this.props.ChangeDate(5)}
-                  scope="col"
+                  onClick={(e) => this.props.ChangeDate(5)}
                 />
                 <td
                   id="date-6"
                   className="date-item"
-                  onClick={e => this.props.ChangeDate(6)}
-                  scope="col"
+                  onClick={(e) => this.props.ChangeDate(6)}
                 />
               </tr>
             </thead>
@@ -91,21 +79,18 @@ class HorizontalMenu extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    date: state.date
+    date: state.date,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    ChangeDate: e => {
+    ChangeDate: (e) => {
       dispatch({ type: "CHANGEDATE", payLoad: e });
-    }
+    },
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HorizontalMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(HorizontalMenu);

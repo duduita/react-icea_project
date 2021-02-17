@@ -4,46 +4,11 @@
   padding-right: 30px;
   bottom: 10px;
   width: 100%;
-  z-index: 10000;
-}
-
-.scale {
-  position: absolute;
-  top: 62px;
-  padding-right: 30px;
-  width: 100%;
-  z-index: 10000;
-}
-
-.submenu {
+  z-index: 1000;
 }
 
 td {
   color: #fff;
-}
-
-.bottom > .bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-  width: 100%;
-}
-
-.bar > div {
-  margin-left: 20px;
-  display: flex;
-  width: 100%;
-  justify-items: center;
-  align-items: center;
-}
-
-.thead > tr {
-}
-
-.table {
-}
-.date {
 }
 
 .date-item {
@@ -56,5 +21,25 @@ td {
 }
 
 .date-item:hover {
-  background: #333 !important;
+  background: #4c4949 !important;
+}
+.bar {
+  width: 100%;
+  margin-left: 30px;
+  margin-top: 12px; /* it's wierd */
+}
+
+.progress {
+  width: 100%;
+  height: 6px;
+  background-color: #4c4949;
+}
+
+.progress-bar {
+  height: 6px;
+  background-color: #e5e5e5;
+}
+
+.submenu {
+  display: flex;
 }
