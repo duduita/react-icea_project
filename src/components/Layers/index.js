@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
 import { useLeafletContext } from "@react-leaflet/core";
-import L from "leaflet";
+import * as L from "leaflet";
 import { connect } from "react-redux";
 import axios from "axios";
+import "leaflet-velocity";
 
 const SatelliteLoader = () => {
   var imageBounds;
   var imageUrl;
   var satellite_src = [];
+  const context = useLeafletContext();
+  const container = context.layerContainer || context.map;
   const url =
     "https://api-redemet.decea.mil.br/produtos/satelite/realcada?api_key=gdkP7S0gy9sB4JsOLoYe34D52CGyrDzZK3xAWe80&data=2021020905";
   const getAllNotes = () => {
@@ -18,30 +21,49 @@ const SatelliteLoader = () => {
       ];
       imageUrl = res.data.data.satelite[0].path;
       satellite_src.push({ location: imageBounds, src: imageUrl });
+      console.log(satellite_src[0]);
     });
   };
   getAllNotes();
   return null;
 };
 
-const GlobalWind = () => {
+const GlobalWind = (props) => {
   const url = "../data/global.json";
   const context = useLeafletContext();
+  const container = context.layerContainer || context.map;
+  var velocityLayer;
 
-  axios.get(url).then((res) => {
-    var data = res.data;
-    var velocityLayer2 = L.tileLayer({
-      displayValues: true,
-      displayOptions: {
-        velocityType: "Wind",
-        displayPosition: "bottomleft",
-        displayEmptyString: "No wind data",
-      },
-      data: data,
-      maxVelocity: 25,
-    });
-    const container = context.layerContainer || context.map;
-    container.addLayer(velocityLayer2);
+  async function makeGetRequest() {
+    let res = await axios.get("../data/global.json");
+
+    let data = res.data;
+    return data;
+  }
+
+  makeGetRequest();
+
+  velocityLayer = L.velocityLayer({
+    displayValues: true,
+    displayOptions: {
+      velocityType: "Wind",
+      displayPosition: "bottomleft",
+      displayEmptyString: "No wind data",
+    },
+    data: makeGetRequest(),
+    maxVelocity: 25,
+  });
+
+  console.log(makeGetRequest());
+
+  useEffect(() => {
+    if (props.windMenu) {
+      container.addLayer(velocityLayer);
+    }
+
+    return () => {
+      container.removeLayer(velocityLayer);
+    };
   });
 
   return null;
