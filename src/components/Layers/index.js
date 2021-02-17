@@ -32,29 +32,16 @@ const GlobalWind = (props) => {
   const url = "../data/global.json";
   const context = useLeafletContext();
   const container = context.layerContainer || context.map;
-  var velocityLayer;
-
-  async function makeGetRequest() {
-    let res = await axios.get("../data/global.json");
-
-    let data = res.data;
-    return data;
-  }
-
-  makeGetRequest();
-
-  velocityLayer = L.velocityLayer({
+  var velocityLayer = L.velocityLayer({
     displayValues: true,
     displayOptions: {
       velocityType: "Wind",
       displayPosition: "bottomleft",
       displayEmptyString: "No wind data",
     },
-    data: makeGetRequest(),
+    data: "data/global.json",
     maxVelocity: 25,
   });
-
-  console.log(makeGetRequest());
 
   useEffect(() => {
     if (props.windMenu) {
