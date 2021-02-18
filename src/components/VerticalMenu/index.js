@@ -11,21 +11,22 @@ const VerticalMenu = (props) => {
         <ul>
           <ButtonWithIcon
             alt="temperature"
-            iconSize="icon"
+            className="icon"
             id="temperature"
             name="Temperatura"
             src="assets/sun.svg"
-          />
+          />{" "}
           <ButtonWithIcon
             alt="satellite"
-            iconSize="icon"
+            className="icon"
             id="satellite"
             name="Satelite"
+            onClick={(e) => props.ActiveSatellite(props.satellite)}
             src="assets/satellite.svg"
           />
           <ButtonWithIcon
             alt="radar"
-            iconSize="icon"
+            className="icon"
             id="radar"
             name="Radar"
             src="assets/radar.svg"
@@ -43,7 +44,7 @@ const VerticalMenu = (props) => {
               <ul>
                 <ButtonWithIcon
                   alt="globe"
-                  iconSize="small-icon"
+                  className="small-icon"
                   id="globe"
                   name="Globo"
                   onClick={(e) => {
@@ -53,21 +54,21 @@ const VerticalMenu = (props) => {
                 />
                 <ButtonWithIcon
                   alt="australia"
-                  iconSize="small-icon"
+                  className="small-icon"
                   id="australia"
                   name="Australia"
                   src="assets/wind.svg"
                 />
                 <ButtonWithIcon
                   alt="south"
-                  iconSize="small-icon"
+                  className="small-icon"
                   id="south"
                   name="Sul / Sudeste"
                   src="assets/wind.svg"
                 />
                 <ButtonWithIcon
                   alt="test"
-                  iconSize="small-icon"
+                  className="small-icon"
                   id="test"
                   name="Teste"
                   src="assets/wind.svg"
@@ -94,21 +95,21 @@ const VerticalMenu = (props) => {
               <ul>
                 <ButtonWithIcon
                   alt="indefinido"
-                  iconSize="icon"
+                  className="icon"
                   id="indefinido"
                   name="Precipitação"
                   src="assets/wi-raindrop.svg"
                 />
                 <ButtonWithIcon
                   alt="indefinido"
-                  iconSize="icon"
+                  className="icon"
                   id="indefinido"
                   name="Precipitação Não Convectiva"
                   src="assets/wi-raindrop.svg"
                 />
                 <ButtonWithIcon
                   alt="australia"
-                  iconSize="icon"
+                  className="icon"
                   id="australia"
                   name="Precipitação Convectiva"
                   src="assets/wi-raindrop.svg"
@@ -126,6 +127,7 @@ const mapStateToProps = (state) => {
   return {
     windMenu: state.windMenu,
     windGlobal: state.windGlobal,
+    satellite: state.satellite,
     precipitationMenu: state.precipitationMenu,
   };
 };
@@ -134,6 +136,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     ToggleWind: (e) => {
       dispatch({ type: "TOGGLEWIND", payLoad: e });
+    },
+    ActiveSatellite: (e) => {
+      dispatch({ type: "SATELLITE", payLoad: e });
     },
     TogglePrecipitation: (e) => {
       dispatch({ type: "TOGGLEPRECIPITATION", payLoad: e });

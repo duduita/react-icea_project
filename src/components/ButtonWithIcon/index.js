@@ -7,7 +7,7 @@ export class ButtonWithIcon extends Component {
         <a id={this.props.id} href="#home" onClick={this.props.onClick}>
           <img
             alt={this.props.alt}
-            className={this.props.iconSize}
+            className={this.props.className}
             src={this.props.src}
           />
           {this.props.name}

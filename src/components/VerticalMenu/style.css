@@ -40,6 +40,10 @@ nav ul li a .fa {
   margin-right: 5px;
   float: right;
 }
+
+.actived {
+  background: #f8f8f8;
+}
 nav ul ul {
   background-color: #ebebeb;
 }

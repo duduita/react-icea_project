@@ -4,7 +4,9 @@ const initialState = {
   windGlobalTime: 1,
   precipitationMenu: false,
   date: 1,
+  satellite: false,
   layerVisible: "global",
+  playing: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,6 +23,25 @@ const reducer = (state = initialState, action) => {
       };
     }
   }
+  if (action.type === "PLAY") {
+    if (!action.payLoad) {
+      return {
+        ...state,
+        playing: true,
+      };
+    } else {
+      return {
+        ...state,
+        playing: false,
+      };
+    }
+  }
+  if (action.type === "PLUSDATE") {
+    return {
+      ...state,
+      date: state.date + 1,
+    };
+  }
   if (action.type === "WINDGLOBAL") {
     if (!action.payLoad) {
       return {
@@ -31,6 +52,19 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         windGlobal: false,
+      };
+    }
+  }
+  if (action.type === "SATELLITE") {
+    if (!action.payLoad) {
+      return {
+        ...state,
+        satellite: true,
+      };
+    } else {
+      return {
+        ...state,
+        satellite: false,
       };
     }
   }

@@ -45,17 +45,7 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = (dispatch) => {
-  return {
-    ToggleWind: (e) => {
-      dispatch({ type: "TOGGLEWIND", payLoad: e });
-    },
-    TogglePrecipitation: (e) => {
-      dispatch({ type: "TOGGLEPRECIPITATION", payLoad: e });
-    },
-    WindGlobal: (e) => {
-      dispatch({ type: "WINDGLOBAL", payLoad: e });
-    },
-  };
+  return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GlobalWind);

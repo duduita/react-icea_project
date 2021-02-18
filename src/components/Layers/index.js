@@ -8,29 +8,7 @@ import GlobalWind from "../GlobalWind";
 import "react-leaflet";
 import "esri-leaflet";
 import { BasemapLayer } from "react-esri-leaflet";
-
-const SatelliteLoader = () => {
-  var imageBounds;
-  var imageUrl;
-  var satellite_src = [];
-  const context = useLeafletContext();
-  const container = context.layerContainer || context.map;
-  const url =
-    "https://api-redemet.decea.mil.br/produtos/satelite/realcada?api_key=gdkP7S0gy9sB4JsOLoYe34D52CGyrDzZK3xAWe80&data=2021020905";
-  const getAllNotes = () => {
-    axios.get(url).then((res) => {
-      imageBounds = [
-        [res.data.data.lat_lon.lat_min, res.data.data.lat_lon.lon_min],
-        [res.data.data.lat_lon.lat_max, res.data.data.lat_lon.lon_max],
-      ];
-      imageUrl = res.data.data.satelite[0].path;
-      satellite_src.push({ location: imageBounds, src: imageUrl });
-      //console.log(satellite_src[0]);
-    });
-  };
-  getAllNotes();
-  return null;
-};
+import SatelliteLayer from "../SatelliteLayer";
 
 const Layers = (props) => {
   const Square = () => {
@@ -54,6 +32,7 @@ const Layers = (props) => {
     <div>
       <BasemapLayer name="DarkGray" />
       <GlobalWind />
+      <SatelliteLayer />
     </div>
   );
 };
