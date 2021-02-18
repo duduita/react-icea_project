@@ -21,54 +21,56 @@ const SatelliteLoader = () => {
       ];
       imageUrl = res.data.data.satelite[0].path;
       satellite_src.push({ location: imageBounds, src: imageUrl });
-      console.log(satellite_src[0]);
+      //console.log(satellite_src[0]);
     });
   };
   getAllNotes();
   return null;
 };
 
-const GlobalWind = (props) => {
-  const url = "../data/global.json";
-  const context = useLeafletContext();
-  const container = context.layerContainer || context.map;
-  var velocityLayer = L.velocityLayer({
-    displayValues: true,
-    displayOptions: {
-      velocityType: "Wind",
-      displayPosition: "bottomleft",
-      displayEmptyString: "No wind data",
-    },
-    data: "data/global.json",
-    maxVelocity: 25,
-  });
-
-  useEffect(() => {
-    if (props.windMenu) {
-      container.addLayer(velocityLayer);
-    }
-
-    return () => {
-      container.removeLayer(velocityLayer);
-    };
-  });
-
-  return null;
-};
-
 const Layers = (props) => {
+  var velocityLayer;
   const Square = () => {
     const context = useLeafletContext();
     const bounds = L.latLng([51.505, -0.09]).toBounds(1000000);
     const square = new L.Rectangle(bounds);
-    const container = context.layerContainer || context.map;
+    const container = context.map;
     useEffect(() => {
       if (props.windMenu) {
         container.addLayer(square);
       }
-
       return () => {
         container.removeLayer(square);
+      };
+    });
+
+    return null;
+  };
+
+  const GlobalWind = () => {
+    const url = "data/global.json";
+    const context = useLeafletContext();
+    const container = context.map;
+    useEffect(() => {
+      axios.get(url).then((resp) => {
+        velocityLayer = L.velocityLayer({
+          displayValues: true,
+          displayOptions: {
+            velocityType: "Wind",
+            displayPosition: "bottomleft",
+            displayEmptyString: "No wind data",
+          },
+          data: resp.data,
+          maxVelocity: 25,
+        });
+
+        if (props.windMenu) {
+          container.addLayer(velocityLayer);
+        }
+      });
+      return () => {
+        container.removeLayer(velocityLayer);
+        console.log(container.hasLayer(velocityLayer));
       };
     });
     return null;
