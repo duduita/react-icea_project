@@ -1,8 +1,9 @@
 const initialState = {
   windMenu: false,
+  windMenu2: false,
   precipitationMenu: false,
   date: 1,
-  layerVisible: "global"
+  layerVisible: "global",
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,12 +11,25 @@ const reducer = (state = initialState, action) => {
     if (!action.payLoad) {
       return {
         ...state,
-        windMenu: true
+        windMenu: true,
       };
     } else {
       return {
         ...state,
-        windMenu: false
+        windMenu: false,
+      };
+    }
+  }
+  if (action.type === "TOGGLEWIND2") {
+    if (!action.payLoad) {
+      return {
+        ...state,
+        windMenu2: true,
+      };
+    } else {
+      return {
+        ...state,
+        windMenu2: false,
       };
     }
   }
@@ -23,25 +37,25 @@ const reducer = (state = initialState, action) => {
     if (!action.payLoad) {
       return {
         ...state,
-        precipitationMenu: true
+        precipitationMenu: true,
       };
     } else {
       return {
         ...state,
-        precipitationMenu: false
+        precipitationMenu: false,
       };
     }
   }
   if (action.type === "CHANGEDATE") {
     return {
       ...state,
-      date: action.payLoad
+      date: action.payLoad,
     };
   }
   if (action.type === "TOGGLELAYER") {
     return {
       ...state,
-      layerVisible: action.payLoad
+      layerVisible: action.payLoad,
     };
   }
   return state;

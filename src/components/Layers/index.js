@@ -4,6 +4,7 @@ import * as L from "leaflet";
 import { connect } from "react-redux";
 import axios from "axios";
 import "leaflet-velocity";
+import GlobalWind from "../GlobalWind";
 
 const SatelliteLoader = () => {
   var imageBounds;
@@ -29,7 +30,6 @@ const SatelliteLoader = () => {
 };
 
 const Layers = (props) => {
-  var velocityLayer;
   const Square = () => {
     const context = useLeafletContext();
     const bounds = L.latLng([51.505, -0.09]).toBounds(1000000);
@@ -44,35 +44,6 @@ const Layers = (props) => {
       };
     });
 
-    return null;
-  };
-
-  const GlobalWind = () => {
-    const url = "data/global.json";
-    const context = useLeafletContext();
-    const container = context.map;
-    useEffect(() => {
-      axios.get(url).then((resp) => {
-        velocityLayer = L.velocityLayer({
-          displayValues: true,
-          displayOptions: {
-            velocityType: "Wind",
-            displayPosition: "bottomleft",
-            displayEmptyString: "No wind data",
-          },
-          data: resp.data,
-          maxVelocity: 25,
-        });
-
-        if (props.windMenu) {
-          container.addLayer(velocityLayer);
-        }
-      });
-      return () => {
-        container.removeLayer(velocityLayer);
-        console.log(container.hasLayer(velocityLayer));
-      };
-    });
     return null;
   };
 

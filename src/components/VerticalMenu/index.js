@@ -46,7 +46,9 @@ const VerticalMenu = (props) => {
                   iconSize="small-icon"
                   id="globe"
                   name="Globo"
-                  onClick={(e) => props.ToggleLayer("global")}
+                  onClick={(e) => {
+                    props.ToggleWind(props.windMenu2);
+                  }}
                   src="assets/wind.svg"
                 />
                 <ButtonWithIcon
