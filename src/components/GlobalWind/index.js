@@ -7,12 +7,11 @@ import "leaflet-velocity";
 
 var velocityLayer = [];
 const GlobalWind = (props) => {
-  const url = "data/global.json";
-  const url2 = "data/global.json";
   const context = useLeafletContext();
   const container = context.map;
   useEffect(() => {
-    if (props.windMenu) {
+    if (props.windGlobal) {
+      const url = `data/globalWind${props.date}.json`;
       axios
         .get(url)
         .then((resp) => {
@@ -37,41 +36,12 @@ const GlobalWind = (props) => {
     };
   });
 
-  useEffect(() => {
-    if (props.windMenu2) {
-      alert("oi");
-      axios
-        .get(url2)
-        .then((resp) => {
-          velocityLayer[1] = L.velocityLayer({
-            displayValues: true,
-            displayOptions: {
-              velocityType: "Wind",
-              displayPosition: "bottomleft",
-              displayEmptyString: "No wind data",
-            },
-            data: resp.data,
-            maxVelocity: 25,
-          });
-        })
-        .then(() => {
-          container.addLayer(velocityLayer[1]);
-        });
-    }
-    return () => {
-      if (container.hasLayer(velocityLayer[1]))
-        container.removeLayer(velocityLayer[1]);
-    };
-  });
-
   return null;
 };
 const mapStateToProps = (state) => {
   return {
-    windMenu: state.windMenu,
-    windMenu2: state.windMenu,
-    precipitationMenu: state.precipitationMenu,
-    layerVisible: state.layerVisible,
+    windGlobal: state.windGlobal,
+    date: state.date,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -81,6 +51,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     TogglePrecipitation: (e) => {
       dispatch({ type: "TOGGLEPRECIPITATION", payLoad: e });
+    },
+    WindGlobal: (e) => {
+      dispatch({ type: "WINDGLOBAL", payLoad: e });
     },
   };
 };

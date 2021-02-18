@@ -5,6 +5,9 @@ import { connect } from "react-redux";
 import axios from "axios";
 import "leaflet-velocity";
 import GlobalWind from "../GlobalWind";
+import "react-leaflet";
+import "esri-leaflet";
+import { BasemapLayer } from "react-esri-leaflet";
 
 const SatelliteLoader = () => {
   var imageBounds;
@@ -49,7 +52,7 @@ const Layers = (props) => {
 
   return (
     <div>
-      <Square />
+      <BasemapLayer name="DarkGray" />
       <GlobalWind />
     </div>
   );

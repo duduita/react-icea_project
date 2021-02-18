@@ -1,6 +1,7 @@
 const initialState = {
   windMenu: false,
-  windMenu2: false,
+  windGlobal: false,
+  windGlobalTime: 1,
   precipitationMenu: false,
   date: 1,
   layerVisible: "global",
@@ -20,16 +21,16 @@ const reducer = (state = initialState, action) => {
       };
     }
   }
-  if (action.type === "TOGGLEWIND2") {
+  if (action.type === "WINDGLOBAL") {
     if (!action.payLoad) {
       return {
         ...state,
-        windMenu2: true,
+        windGlobal: true,
       };
     } else {
       return {
         ...state,
-        windMenu2: false,
+        windGlobal: false,
       };
     }
   }

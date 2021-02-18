@@ -47,7 +47,7 @@ const VerticalMenu = (props) => {
                   id="globe"
                   name="Globo"
                   onClick={(e) => {
-                    props.ToggleWind(props.windMenu2);
+                    props.WindGlobal(props.windGlobal);
                   }}
                   src="assets/wind.svg"
                 />
@@ -125,8 +125,8 @@ const VerticalMenu = (props) => {
 const mapStateToProps = (state) => {
   return {
     windMenu: state.windMenu,
+    windGlobal: state.windGlobal,
     precipitationMenu: state.precipitationMenu,
-    layerVisible: state.layerVisible,
   };
 };
 
@@ -138,8 +138,8 @@ const mapDispatchToProps = (dispatch) => {
     TogglePrecipitation: (e) => {
       dispatch({ type: "TOGGLEPRECIPITATION", payLoad: e });
     },
-    ToggleLayer: (e) => {
-      dispatch({ type: "TOGGLELAYER", payLoad: e });
+    WindGlobal: (e) => {
+      dispatch({ type: "WINDGLOBAL", payLoad: e });
     },
   };
 };

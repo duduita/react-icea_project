@@ -16,20 +16,20 @@ const Map = () => {
       <VerticalMenu />
       <MapContainer
         style={{ height: "100%", width: "100%" }}
-        center={[51.505, -0.09]}
+        center={[-23.5505, -46.6333]}
         zoom={5}
         scrollWheelZoom={false}
       >
         <Layers />
         <LayersControl>
           <LayersControl.BaseLayer checked name="OpenStreetMap.Mapnik">
-            <TileLayer
+            {/* <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
+            /> */}
           </LayersControl.BaseLayer>
         </LayersControl>
-        <Marker position={[51.505, -0.09]}></Marker>
+        {/* <Marker position={[51.505, -0.09]}></Marker> */}
       </MapContainer>
     </div>
   );
