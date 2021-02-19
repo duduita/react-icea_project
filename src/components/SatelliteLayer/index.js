@@ -8,6 +8,7 @@ import "leaflet-velocity";
 var satelliteLayer = [];
 
 const SatelliteLayer = (props) => {
+  // https://www.robinwieruch.de/react-hooks-fetch-data
   useEffect(() => {
     for (var i = 1; i < 6; i++) {
       const url = `https://api-redemet.decea.mil.br/produtos/satelite/realcada?api_key=gdkP7S0gy9sB4JsOLoYe34D52CGyrDzZK3xAWe80&data=202102090${i}`;
