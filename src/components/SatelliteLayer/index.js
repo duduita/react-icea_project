@@ -6,32 +6,40 @@ import axios from "axios";
 import "leaflet-velocity";
 
 var satelliteLayer = [];
+
 const SatelliteLayer = (props) => {
+  useEffect(() => {
+    for (var i = 1; i < 6; i++) {
+      const url = `https://api-redemet.decea.mil.br/produtos/satelite/realcada?api_key=gdkP7S0gy9sB4JsOLoYe34D52CGyrDzZK3xAWe80&data=202102090${i}`;
+      axios.get(url).then((res) => {
+        console.log("a");
+        props.LoadingSatellite(props.loadingSatellite);
+        console.log("loading " + props.loadingSatellite);
+        var res = res.data;
+        var imageUrl = res.data.satelite[0].path;
+        var imageBounds = [
+          [res.data.lat_lon.lat_min, res.data.lat_lon.lon_min],
+          [res.data.lat_lon.lat_max, res.data.lat_lon.lon_max],
+        ];
+        satelliteLayer[i] = L.imageOverlay(imageUrl, imageBounds);
+        props.LoadingSatellite(props.loadingSatellite);
+        console.log("loading " + props.loadingSatellite);
+      });
+    }
+  }, []);
   const context = useLeafletContext();
   const container = context.map;
+
   useEffect(() => {
-    if (props.satellite) {
-      const url = `https://api-redemet.decea.mil.br/produtos/satelite/realcada?api_key=gdkP7S0gy9sB4JsOLoYe34D52CGyrDzZK3xAWe80&data=202102090${props.date}`;
-      axios
-        .get(url)
-        .then((res) => {
-          var res = res.data;
-          var imageUrl = res.data.satelite[0].path;
-          var imageBounds = [
-            [res.data.lat_lon.lat_min, res.data.lat_lon.lon_min],
-            [res.data.lat_lon.lat_max, res.data.lat_lon.lon_max],
-          ];
-          satelliteLayer = L.imageOverlay(imageUrl, imageBounds);
-        })
-        .then(() => {
-          container.addLayer(satelliteLayer);
-        });
+    console.log("b");
+    if (props.satellite && !props.loadingSatellite) {
+      container.addLayer(satelliteLayer[props.date]);
     }
-    return () => {
-      console.log(container.hasLayer(satelliteLayer));
-      if (container.hasLayer(satelliteLayer))
-        container.removeLayer(satelliteLayer);
-    };
+    // return () => {
+    //   console.log(container.hasLayer(satelliteLayer[props.date]));
+    //   if (container.hasLayer(satelliteLayer[props.date]))
+    //     container.removeLayer(satelliteLayer[props.date]);
+    // };
   });
   return null;
 };
@@ -40,10 +48,15 @@ const mapStateToProps = (state) => {
   return {
     satellite: state.satellite,
     date: state.date,
+    loadingSatellite: state.loadingSatellite,
   };
 };
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    LoadingSatellite: (e) => {
+      dispatch({ type: "LOADINGSATELLITE", payLoad: e });
+    },
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SatelliteLayer);

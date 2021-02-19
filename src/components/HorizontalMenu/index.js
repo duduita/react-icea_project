@@ -14,11 +14,10 @@ const HorizontalMenu = (props) => {
     }
   });
   useEffect(() => {
-    if (props.playing) {
-      while (props.date < 6)
-        setTimeout(() => {
-          props.PlusDate();
-        }, 500);
+    if (props.date < 6 && props.playing) {
+      setInterval(() => {
+        props.PlusDate(props.date);
+      }, 1000);
     }
   });
   return (

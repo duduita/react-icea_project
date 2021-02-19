@@ -9,6 +9,7 @@ import "react-leaflet";
 import "esri-leaflet";
 import { BasemapLayer } from "react-esri-leaflet";
 import SatelliteLayer from "../SatelliteLayer";
+import RadarLayer from "../RadarLayer";
 
 const Layers = (props) => {
   const Square = () => {
@@ -33,6 +34,7 @@ const Layers = (props) => {
       <BasemapLayer name="DarkGray" />
       <GlobalWind />
       <SatelliteLayer />
+      <RadarLayer />
     </div>
   );
 };

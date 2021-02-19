@@ -29,6 +29,7 @@ const VerticalMenu = (props) => {
             className="icon"
             id="radar"
             name="Radar"
+            onClick={(e) => props.ActiveRadar(props.radar)}
             src="assets/radar.svg"
           />
           <li id="wind" className="sub-menu">
@@ -128,6 +129,7 @@ const mapStateToProps = (state) => {
     windMenu: state.windMenu,
     windGlobal: state.windGlobal,
     satellite: state.satellite,
+    radar: state.radar,
     precipitationMenu: state.precipitationMenu,
   };
 };
@@ -139,6 +141,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     ActiveSatellite: (e) => {
       dispatch({ type: "SATELLITE", payLoad: e });
+    },
+    ActiveRadar: (e) => {
+      dispatch({ type: "RADAR", payLoad: e });
     },
     TogglePrecipitation: (e) => {
       dispatch({ type: "TOGGLEPRECIPITATION", payLoad: e });

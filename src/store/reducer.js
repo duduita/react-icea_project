@@ -7,6 +7,8 @@ const initialState = {
   satellite: false,
   layerVisible: "global",
   playing: false,
+  radar: false,
+  loadingSatellite: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -20,6 +22,19 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         windMenu: false,
+      };
+    }
+  }
+  if (action.type === "RADAR") {
+    if (!action.payLoad) {
+      return {
+        ...state,
+        radar: true,
+      };
+    } else {
+      return {
+        ...state,
+        radar: false,
       };
     }
   }
@@ -39,7 +54,7 @@ const reducer = (state = initialState, action) => {
   if (action.type === "PLUSDATE") {
     return {
       ...state,
-      date: state.date + 1,
+      date: action.payLoad + 1,
     };
   }
   if (action.type === "WINDGLOBAL") {
@@ -68,6 +83,19 @@ const reducer = (state = initialState, action) => {
       };
     }
   }
+  if (action.type === "LOADINGSATELLITE") {
+    if (!action.payLoad) {
+      return {
+        ...state,
+        loadingSatellite: true,
+      };
+    } else {
+      return {
+        ...state,
+        loadingSatellite: false,
+      };
+    }
+  }
   if (action.type === "TOGGLEPRECIPITATION") {
     if (!action.payLoad) {
       return {
@@ -87,6 +115,7 @@ const reducer = (state = initialState, action) => {
       date: action.payLoad,
     };
   }
+
   if (action.type === "TOGGLELAYER") {
     return {
       ...state,
