@@ -18,18 +18,9 @@ const Map = () => {
         style={{ height: "100%", width: "100%" }}
         center={[-23.5505, -46.6333]}
         zoom={3}
-        scrollWheelZoom={false}
+        scrollWheelZoom={true}
       >
         <Layers />
-        <LayersControl>
-          <LayersControl.BaseLayer checked name="OpenStreetMap.Mapnik">
-            {/* <TileLayer
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            /> */}
-          </LayersControl.BaseLayer>
-        </LayersControl>
-        {/* <Marker position={[51.505, -0.09]}></Marker> */}
       </MapContainer>
     </div>
   );

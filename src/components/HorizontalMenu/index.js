@@ -14,12 +14,14 @@ const HorizontalMenu = (props) => {
     }
   });
   useEffect(() => {
-    if (props.date < 6 && props.playing) {
-      setInterval(() => {
+    console.log(props.date);
+    if (props.playing && props.date < 6) {
+      var idVar = setInterval(() => {
         props.PlusDate(props.date);
+        clearInterval(idVar);
       }, 1000);
     }
-  });
+  }, [props]);
   return (
     <div className="bottom">
       <div className="submenu">
