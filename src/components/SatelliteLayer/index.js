@@ -12,9 +12,19 @@ const SatelliteLayer = (props) => {
   const container = context.map;
 
   useEffect(() => {
-    if (satelliteLayer.length === 0)
+    if (satelliteLayer.length === 0) {
       for (let i = 1; i <= 6; i++) {
-        const url = `https://api-redemet.decea.mil.br/produtos/satelite/realcada?api_key=gdkP7S0gy9sB4JsOLoYe34D52CGyrDzZK3xAWe80&data=202102090${i}`;
+        let requestDate = new Date();
+        requestDate.setHours(requestDate.getHours() - 6 + i);
+        let year = requestDate.getFullYear();
+        let month = requestDate.getMonth();
+        let day = requestDate.getDate();
+        let hour = requestDate.getHours();
+        if (hour < 10) hour = `0${hour}`;
+        if (day < 10) day = `0${day}`;
+        if (month < 10) month = `0${month}`;
+        var requestHour = `${year}${month}${day}${hour}`;
+        const url = `https://api-redemet.decea.mil.br/produtos/satelite/realcada?api_key=gdkP7S0gy9sB4JsOLoYe34D52CGyrDzZK3xAWe80&data=${requestHour}`;
         axios.get(url).then((res) => {
           res = res.data;
           var imageUrl = res.data.satelite[0].path;
@@ -25,6 +35,7 @@ const SatelliteLayer = (props) => {
           satelliteLayer[i] = L.imageOverlay(imageUrl, imageBounds);
         });
       }
+    }
     if (props.satellite) {
       container.addLayer(satelliteLayer[props.date]);
     }
@@ -41,6 +52,7 @@ const mapStateToProps = (state) => {
     satellite: state.satellite,
     date: state.date,
     loadingSatellite: state.loadingSatellite,
+    time: state.time,
   };
 };
 const mapDispatchToProps = (dispatch) => {

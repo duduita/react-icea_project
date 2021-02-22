@@ -3,14 +3,30 @@ import { connect } from "react-redux";
 import "./style.css";
 
 const HorizontalMenu = (props) => {
+  var futureDays;
+  var pastHours;
   useEffect(() => {
-    const futureDays = new Date();
-    var weekDays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
-    for (var i = 1; i <= 6; i++) {
-      futureDays.setDate(new Date().getDate() + i - 1);
-      document.getElementById(`date-${i}`).innerHTML = `${
-        weekDays[futureDays.getDay()]
-      } ${futureDays.getDate()}`;
+    if (props.scale === 80) {
+      futureDays = new Date();
+      var weekDays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+      for (var i = 1; i <= 6; i++) {
+        futureDays.setDate(new Date().getDate() + i - 1);
+        document.getElementById(`date-${i}`).innerHTML = `${
+          weekDays[futureDays.getDay()]
+        } ${futureDays.getDate()}`;
+      }
+    } else {
+      for (var i = 1; i <= 6; i++) {
+        pastHours = new Date();
+        pastHours.setDate(pastHours.getHours() - 6 + i);
+        document.getElementById(
+          `date-${i}`
+        ).innerHTML = `${pastHours.getDate()}:${
+          pastHours.getMinutes() < 10
+            ? `0${pastHours.getMinutes()}`
+            : pastHours.getMinutes()
+        }h`;
+      }
     }
   });
   useEffect(() => {
@@ -24,17 +40,26 @@ const HorizontalMenu = (props) => {
   }, [props]);
   return (
     <div className="bottom">
-      <div className="submenu">
-        <div className="options">
-          <button
-            onClick={(e) => props.Play(props.playing)}
-            className="btn btn-primary play-button"
-            type="submit"
-          >
+      <div className="options">
+        <button
+          onClick={(e) => props.Play(props.playing)}
+          className="btn btn-primary play-button"
+          type="submit"
+        >
+          {props.playing ? (
+            <span id="play" className="glyphicon pause glyphicon-pause" />
+          ) : (
             <span id="play" className="glyphicon play glyphicon-play" />
-          </button>
-        </div>
-        <div className="bar">
+          )}
+        </button>
+      </div>
+      <div className="submenu">
+        <div
+          className="bar"
+          style={{
+            width: `${props.scale}%`,
+          }}
+        >
           <div id="bar-field" className="progress">
             <div
               id="p-bar"
@@ -48,7 +73,13 @@ const HorizontalMenu = (props) => {
         </div>
       </div>
       <div className="scale">
-        <table id="date-line" className="table table-borderless">
+        <table
+          id="date-line"
+          className="table table-borderless"
+          style={{
+            width: `${props.scale}%`,
+          }}
+        >
           <thead className="thead">
             <tr className="date">
               <td
@@ -93,6 +124,8 @@ const mapStateToProps = (state) => {
   return {
     date: state.date,
     playing: state.playing,
+    scale: state.scale,
+    windMenu: state.windMenu,
   };
 };
 

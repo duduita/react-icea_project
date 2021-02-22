@@ -60,20 +60,6 @@ const VerticalMenu = (props) => {
                   name="Australia"
                   src="assets/wind.svg"
                 />
-                <ButtonWithIcon
-                  alt="south"
-                  className="small-icon"
-                  id="south"
-                  name="Sul / Sudeste"
-                  src="assets/wind.svg"
-                />
-                <ButtonWithIcon
-                  alt="test"
-                  className="small-icon"
-                  id="test"
-                  name="Teste"
-                  src="assets/wind.svg"
-                />
               </ul>
             ) : null}
           </li>

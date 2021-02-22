@@ -9,6 +9,7 @@
 
 td {
   color: #fff;
+  text-align: center;
 }
 
 .date-item {
@@ -18,6 +19,7 @@ td {
   -ms-transition: 0.2s linear;
   -o-transition: 0.2s linear;
   transition: 0.2s linear;
+  justify-content: center;
 }
 
 .date-item:hover {
@@ -25,7 +27,6 @@ td {
 }
 .bar {
   width: 100%;
-  margin-left: 30px;
   margin-top: 12px; /* it's wierd */
 }
 
@@ -42,4 +43,14 @@ td {
 
 .submenu {
   display: flex;
+  justify-content: center;
+}
+
+.scale {
+  display: flex;
+  justify-content: center;
+}
+
+.options {
+  position: absolute;
 }

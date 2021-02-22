@@ -44,6 +44,7 @@ const mapStateToProps = (state) => {
     windMenu: state.windMenu,
     precipitationMenu: state.precipitationMenu,
     layerVisible: state.layerVisible,
+    time: state.time,
   };
 };
 
@@ -54,6 +55,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     TogglePrecipitation: (e) => {
       dispatch({ type: "TOGGLEPRECIPITATION", payLoad: e });
+    },
+    UpdateTime: (e) => {
+      dispatch({ type: "UPDATETIME", payLoad: e });
     },
   };
 };

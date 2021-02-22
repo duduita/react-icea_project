@@ -1,3 +1,6 @@
+const bigScale = 80;
+const smallScale = 50;
+
 const initialState = {
   windMenu: false,
   windGlobal: false,
@@ -9,6 +12,7 @@ const initialState = {
   playing: false,
   radar: false,
   loadingSatellite: false,
+  scale: 80,
 };
 
 const reducer = (state = initialState, action) => {
@@ -30,11 +34,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         radar: true,
+        scale: smallScale,
       };
     } else {
       return {
         ...state,
         radar: false,
+        scale: smallScale,
       };
     }
   }
@@ -57,16 +63,24 @@ const reducer = (state = initialState, action) => {
       date: action.payLoad + 1,
     };
   }
+  if (action.type === "UPDATETIME") {
+    return {
+      ...state,
+      time: action.payLoad,
+    };
+  }
   if (action.type === "WINDGLOBAL") {
     if (!action.payLoad) {
       return {
         ...state,
         windGlobal: true,
+        scale: bigScale,
       };
     } else {
       return {
         ...state,
         windGlobal: false,
+        scale: bigScale,
       };
     }
   }
@@ -75,11 +89,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         satellite: true,
+        scale: smallScale,
       };
     } else {
       return {
         ...state,
         satellite: false,
+        scale: smallScale,
       };
     }
   }
@@ -101,11 +117,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         precipitationMenu: true,
+        scale: bigScale,
       };
     } else {
       return {
         ...state,
         precipitationMenu: false,
+        scale: bigScale,
       };
     }
   }
