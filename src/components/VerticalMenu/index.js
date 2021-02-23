@@ -57,7 +57,10 @@ const VerticalMenu = (props) => {
                   alt="australia"
                   className="small-icon"
                   id="australia"
-                  name="Australia"
+                  name="Teste"
+                  onClick={(e) => {
+                    props.WindTest(props.windTest);
+                  }}
                   src="assets/wind.svg"
                 />
               </ul>
@@ -136,6 +139,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     WindGlobal: (e) => {
       dispatch({ type: "WINDGLOBAL", payLoad: e });
+    },
+    WindTest: (e) => {
+      dispatch({ type: "WINDTEST", payLoad: e });
     },
   };
 };

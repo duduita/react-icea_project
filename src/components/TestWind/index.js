@@ -6,12 +6,12 @@ import axios from "axios";
 import "leaflet-velocity";
 
 var velocityLayer = [];
-const GlobalWind = (props) => {
+const TestWind = (props) => {
   const context = useLeafletContext();
   const container = context.map;
   useEffect(() => {
-    if (props.windGlobal) {
-      const url = `data/globalWind${props.date}.json`;
+    if (props.windTest) {
+      const url = `data/testWind${props.date}.json`;
       axios
         .get(url)
         .then((resp) => {
@@ -38,16 +38,14 @@ const GlobalWind = (props) => {
 
   return null;
 };
-
 const mapStateToProps = (state) => {
   return {
-    windGlobal: state.windGlobal,
+    windTest: state.windTest,
     date: state.date,
   };
 };
-
 const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GlobalWind);
+export default connect(mapStateToProps, mapDispatchToProps)(TestWind);

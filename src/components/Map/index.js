@@ -16,8 +16,8 @@ const Map = () => {
       <VerticalMenu />
       <MapContainer
         style={{ height: "100%", width: "100%" }}
-        center={[-23.5505, -46.6333]}
-        zoom={3}
+        center={[-23.5505, -53]}
+        zoom={3.5}
         scrollWheelZoom={true}
       >
         <Layers />

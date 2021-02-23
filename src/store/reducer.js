@@ -5,6 +5,7 @@ const initialState = {
   windMenu: false,
   windGlobal: false,
   windGlobalTime: 1,
+  windTest: false,
   precipitationMenu: false,
   date: 1,
   satellite: false,
@@ -26,6 +27,19 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         windMenu: false,
+      };
+    }
+  }
+  if (action.type === "WINDTEST") {
+    if (!action.payLoad) {
+      return {
+        ...state,
+        windTest: true,
+      };
+    } else {
+      return {
+        ...state,
+        windTest: false,
       };
     }
   }
