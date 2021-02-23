@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import { useLeafletContext } from "@react-leaflet/core";
 import * as L from "leaflet";
 import { connect } from "react-redux";
@@ -33,7 +33,9 @@ const Layers = (props) => {
     <div>
       <BasemapLayer name="DarkGray" />
       <GlobalWind />
-      <SatelliteLayer />
+      <Suspense fallback={console.log("carregando")}>
+        <SatelliteLayer />
+      </Suspense>
       <RadarLayer />
     </div>
   );

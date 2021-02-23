@@ -11,9 +11,8 @@ const RadarLayer = (props) => {
   const container = context.map;
   useEffect(() => {
     if (myLayerGroup.length === 0) {
-      for (var j = 1; j <= 6; j++) {
-        console.log("my j is " + j);
-        let requestDate = new Date();
+      let requestDate = new Date();
+      for (let j = 1; j <= 6; j++) {
         requestDate.setHours(requestDate.getHours() - 6 + j);
         let year = requestDate.getFullYear();
         let month = requestDate.getMonth();
@@ -22,14 +21,12 @@ const RadarLayer = (props) => {
         if (hour < 10) hour = `0${hour}`;
         if (day < 10) day = `0${day}`;
         if (month < 10) month = `0${month}`;
-        console.log("c");
         let requestHour = `${year}${month}${day}${hour}`;
-        let url = `https://api-redemet.decea.mil.br/produtos/radar/maxcappi?api_key=gdkP7S0gy9sB4JsOLoYe34D52CGyrDzZK3xAWe80&data=2021010101`;
+        let url = `https://api-redemet.decea.mil.br/produtos/radar/maxcappi?api_key=gdkP7S0gy9sB4JsOLoYe34D52CGyrDzZK3xAWe80&data=${requestHour}`;
         myLayerGroup[j] = L.layerGroup();
         axios.get(url).then((res) => {
-          console.log("c");
-          var res = res.data;
-          for (var i = 0; i < res.data.radar[0].length; i++) {
+          res = res.data;
+          for (let i = 0; i < res.data.radar[0].length; i++) {
             var imageBounds = [
               [res.data.radar[0][i].lat_min, res.data.radar[0][i].lon_min],
               [res.data.radar[0][i].lat_max, res.data.radar[0][i].lon_max],
@@ -37,7 +34,7 @@ const RadarLayer = (props) => {
             var imageUrl = res.data.radar[0][i].path;
             if (imageUrl != undefined) {
               var layer_radar = L.imageOverlay(imageUrl, imageBounds);
-              myLayerGroup[1].addLayer(layer_radar);
+              myLayerGroup[j].addLayer(layer_radar);
             }
           }
         });

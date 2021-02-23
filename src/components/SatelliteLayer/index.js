@@ -12,8 +12,13 @@ const SatelliteLayer = (props) => {
   const container = context.map;
 
   useEffect(() => {
+    console.log("useeffect");
+    if (satelliteLayer.length !== 0) console.log(satelliteLayer);
+
     if (satelliteLayer.length === 0) {
+      console.log("INICIANDO");
       for (let i = 1; i <= 6; i++) {
+        console.log("COLETANDO");
         let requestDate = new Date();
         requestDate.setHours(requestDate.getHours() - 6 + i);
         let year = requestDate.getFullYear();
