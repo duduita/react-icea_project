@@ -1,22 +1,31 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import "./style.css";
+import { Slider, Grid } from "@material-ui/core";
+import Timeline from "../Timeline";
+import PlayButton from "../PlayButton";
 
 const HorizontalMenu = (props) => {
-  var futureDays;
-  var pastHours;
+  // Variáveis que regem o tamanho da timeline em %
+  const bigSize = 80;
+  const smallSize = 50;
+  // Variáveis que vão guardar as datas futuras (modelo) e horas passadas (RedeMET)
+  let futureDays;
+  let pastHours;
   useEffect(() => {
     if (props.scale === 80) {
+      // Lógica para obter os próprios dias
       futureDays = new Date();
-      var weekDays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
-      for (var i = 1; i <= 6; i++) {
+      let weekDays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+      for (let i = 1; i <= 6; i++) {
         futureDays.setDate(new Date().getDate() + i - 1);
         document.getElementById(`date-${i}`).innerHTML = `${
           weekDays[futureDays.getDay()]
         } ${futureDays.getDate()}`;
       }
     } else {
-      for (var i = 1; i <= 6; i++) {
+      // Lógica para obter as horas passadas
+      for (let i = 1; i <= 6; i++) {
         pastHours = new Date();
         pastHours.setDate(pastHours.getHours() - 6 + i);
         document.getElementById(
@@ -30,112 +39,51 @@ const HorizontalMenu = (props) => {
     }
   });
   useEffect(() => {
-    console.log(props.date);
+    // Lógica para alterar o date a partir do play
     if (props.playing && props.date < 6) {
-      var idVar = setInterval(() => {
+      let idVar = setInterval(() => {
         props.PlusDate(props.date);
         clearInterval(idVar);
       }, 1000);
     }
   }, [props]);
+
   return (
-    <div className="bottom">
-      <div className="options">
-        <button
-          onClick={(e) => props.Play(props.playing)}
-          className="btn btn-primary play-button"
-          type="submit"
-        >
-          {props.playing ? (
-            <span id="play" className="glyphicon pause glyphicon-pause" />
-          ) : (
-            <span id="play" className="glyphicon play glyphicon-play" />
-          )}
-        </button>
-      </div>
-      <div className="submenu">
-        <div
-          className="bar"
-          style={{
-            width: `${props.scale}%`,
-          }}
-        >
-          <div id="bar-field" className="progress">
-            <div
-              id="p-bar"
-              className="progress-bar"
-              role="progressbar"
-              style={{
-                width: `${props.date * 16.66}%`,
-              }}
-            />
+    <div className="parent">
+      <div className="bottom">
+        <div className="options">
+          <PlayButton props={props} />
+          <div className="slider">
+            <Grid container justify="center">
+              <Slider
+                aria-labelledby="discrete-slider-custom"
+                step={16.66}
+                value={props.date * 16.66}
+                valueLabelDisplay="off"
+              />{" "}
+            </Grid>
+            <Timeline props={props} />
           </div>
         </div>
-      </div>
-      <div className="scale">
-        <table
-          id="date-line"
-          className="table table-borderless"
-          style={{
-            width: `${props.scale}%`,
-          }}
-        >
-          <thead className="thead">
-            <tr className="date">
-              <td
-                id="date-1"
-                className="date-item"
-                onClick={(e) => props.ChangeDate(1)}
-              />
-              <td
-                id="date-2"
-                className="date-item"
-                onClick={(e) => props.ChangeDate(2)}
-              />
-              <td
-                id="date-3"
-                className="date-item"
-                onClick={(e) => props.ChangeDate(3)}
-              />
-              <td
-                id="date-4"
-                className="date-item"
-                onClick={(e) => props.ChangeDate(4)}
-              />
-              <td
-                id="date-5"
-                className="date-item"
-                onClick={(e) => props.ChangeDate(5)}
-              />
-              <td
-                id="date-6"
-                className="date-item"
-                onClick={(e) => props.ChangeDate(6)}
-              />
-            </tr>
-          </thead>
-        </table>
       </div>
     </div>
   );
 };
 
+// Mapeia os estados para propriedades (redux)
 const mapStateToProps = (state) => {
   return {
     date: state.date,
     playing: state.playing,
-    scale: state.scale,
     windMenu: state.windMenu,
   };
 };
 
+// Mapeia as funções para propriedades (redux)
 const mapDispatchToProps = (dispatch) => {
   return {
     ChangeDate: (e) => {
       dispatch({ type: "CHANGEDATE", payLoad: e });
-    },
-    Play: (e) => {
-      dispatch({ type: "PLAY", payLoad: e });
     },
     PlusDate: (e) => {
       dispatch({ type: "PLUSDATE", payLoad: e });
@@ -143,4 +91,5 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+// Conecta o function component com o redux
 export default connect(mapStateToProps, mapDispatchToProps)(HorizontalMenu);

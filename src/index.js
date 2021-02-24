@@ -27,7 +27,7 @@ ReactDOM.render(
       <MapContainer
         style={{ height: "100%", width: "100%" }}
         center={[-23.5505, -53]}
-        zoom={3.5}
+        zoom={3}
         scrollWheelZoom={true}
       >
         <BasemapLayer name="DarkGray" />

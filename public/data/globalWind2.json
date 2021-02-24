@@ -11,9 +11,7 @@
       "ny": 22,
       "parameterCategory": 2,
       "parameterNumber": 2,
-      "parameterNumberName": "eastward_wind",
-      "parameterUnit": "m.s-1",
-      "refTime": "2017-02-01 23:00:00"
+      "parameterUnit": "m.s-1"
     },
     "data": [
       0.0,

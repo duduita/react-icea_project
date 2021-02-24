@@ -13,7 +13,7 @@ const initialState = {
   satellite: false,
   playing: false,
   radar: false,
-  scale: bigScale,
+  scaleSize: bigScale,
 };
 
 // Máquina de estados do redux
@@ -49,13 +49,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         radar: true,
-        scale: smallScale,
+        scaleSize: smallScale,
       };
     } else {
       return {
         ...state,
         radar: false,
-        scale: smallScale,
+        scaleSize: smallScale,
       };
     }
   }
@@ -83,13 +83,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         windGlobal: true,
-        scale: bigScale,
+        scaleSize: bigScale,
       };
     } else {
       return {
         ...state,
         windGlobal: false,
-        scale: bigScale,
+        scaleSize: bigScale,
       };
     }
   }
@@ -98,13 +98,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         satellite: true,
-        scale: smallScale,
+        scaleSize: smallScale,
       };
     } else {
       return {
         ...state,
         satellite: false,
-        scale: smallScale,
+        scaleSize: smallScale,
       };
     }
   }
@@ -113,13 +113,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         precipitationMenu: true,
-        scale: bigScale,
+        scaleSize: bigScale,
       };
     } else {
       return {
         ...state,
         precipitationMenu: false,
-        scale: bigScale,
+        scaleSize: bigScale,
       };
     }
   }

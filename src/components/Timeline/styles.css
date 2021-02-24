@@ -1,0 +1,19 @@
+.date-item {
+  padding: 4px !important;
+  -webkit-transition: 0.2s linear;
+  -moz-transition: 0.2s linear;
+  -ms-transition: 0.2s linear;
+  -o-transition: 0.2s linear;
+  transition: 0.2s linear;
+  justify-content: center;
+}
+
+.date-item:hover {
+  background: #4c4949 !important;
+  color: #fff;
+}
+
+td {
+  color: #4c4949;
+  text-align: center;
+}

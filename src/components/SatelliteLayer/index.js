@@ -18,9 +18,9 @@ const RequestDate = (requestDate, i) => {
   return `${year}${month}${day}${hour}`;
 };
 
+let satelliteLayer = [];
 const SatelliteLayer = (props) => {
   // Array que irá guardar as requisições
-  let satelliteLayer = [];
 
   // Percebe o contexto (mapa) em que se está
   const context = useLeafletContext();
