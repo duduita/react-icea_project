@@ -5,12 +5,16 @@ import { connect } from "react-redux";
 import axios from "axios";
 import "leaflet-velocity";
 
-var velocityLayer = [];
 const GlobalWind = (props) => {
+  // Array que guardará as velocity layers
+  let velocityLayer = [];
+  // Percebe o contexto (mapa) em que se está
   const context = useLeafletContext();
   const container = context.map;
   useEffect(() => {
+    // Verifica se o mapa está ativado
     if (props.windGlobal) {
+      // Carrega a url referente à data da timeline
       const url = `data/globalWind${props.date}.json`;
       axios
         .get(url)
@@ -18,7 +22,7 @@ const GlobalWind = (props) => {
           velocityLayer[0] = L.velocityLayer({
             displayValues: true,
             displayOptions: {
-              velocityType: "Wind",
+              velocityType: "wind",
               displayPosition: "bottomleft",
               displayEmptyString: "No wind data",
             },

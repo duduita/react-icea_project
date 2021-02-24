@@ -1,6 +1,8 @@
+// Configurando tamanho da timeline em %
 const bigScale = 80;
 const smallScale = 50;
 
+// Estados iniciais das variáveis
 const initialState = {
   windMenu: false,
   windGlobal: false,
@@ -9,13 +11,12 @@ const initialState = {
   precipitationMenu: false,
   date: 1,
   satellite: false,
-  layerVisible: "global",
   playing: false,
   radar: false,
-  loadingSatellite: false,
-  scale: 80,
+  scale: bigScale,
 };
 
+// Máquina de estados do redux
 const reducer = (state = initialState, action) => {
   if (action.type === "TOGGLEWIND") {
     if (!action.payLoad) {
@@ -77,12 +78,6 @@ const reducer = (state = initialState, action) => {
       date: action.payLoad + 1,
     };
   }
-  if (action.type === "UPDATETIME") {
-    return {
-      ...state,
-      time: action.payLoad,
-    };
-  }
   if (action.type === "WINDGLOBAL") {
     if (!action.payLoad) {
       return {
@@ -113,19 +108,6 @@ const reducer = (state = initialState, action) => {
       };
     }
   }
-  if (action.type === "LOADINGSATELLITE") {
-    if (!action.payLoad) {
-      return {
-        ...state,
-        loadingSatellite: true,
-      };
-    } else {
-      return {
-        ...state,
-        loadingSatellite: false,
-      };
-    }
-  }
   if (action.type === "TOGGLEPRECIPITATION") {
     if (!action.payLoad) {
       return {
@@ -148,12 +130,6 @@ const reducer = (state = initialState, action) => {
     };
   }
 
-  if (action.type === "TOGGLELAYER") {
-    return {
-      ...state,
-      layerVisible: action.payLoad,
-    };
-  }
   return state;
 };
 

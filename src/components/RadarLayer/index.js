@@ -23,10 +23,10 @@ const RadarLayer = (props) => {
   // Função que detecta o contexto, i.e., o mapa que carregara as layers
   const context = useLeafletContext();
   const container = context.map;
-  // Análogo ao ComponentDidMount e o ComponentWillMount
-  // Para saber mais: https://reactjs.org/docs/hooks-effect.html
+  // Análogo ao ComponentDidMount e o ComponentWillMount dos componentes comuns
+  // Para saber mais sobre UserEffect: https://reactjs.org/docs/hooks-effect.html
   useEffect(() => {
-    // Condicional para carregar apenas uma vez
+    // Condicional para carregar as requisições apenas uma vez
     if (myLayerGroup.length === 0) {
       let requestDate = new Date();
       for (let j = 1; j <= 6; j++) {
@@ -37,6 +37,7 @@ const RadarLayer = (props) => {
         axios.get(url).then((res) => {
           res = res.data;
           // Agrupando o conjunto de radares na mesma layer
+          // Para entender melhor, faça console.log(res.data.radar)
           for (let i = 0; i < res.data.radar[0].length; i++) {
             var imageBounds = [
               [res.data.radar[0][i].lat_min, res.data.radar[0][i].lon_min],
@@ -56,6 +57,8 @@ const RadarLayer = (props) => {
     if (props.radar) {
       container.addLayer(myLayerGroup[props.date]);
     }
+    // A cada renderização ele remove a layer
+    // Para saber mais, pesquise sobre Cleanup do UseEffect
     return () => {
       if (container.hasLayer(myLayerGroup[props.date]))
         container.removeLayer(myLayerGroup[props.date]);
@@ -72,4 +75,5 @@ const mapStateToProps = (state) => {
   };
 };
 
+// Conecta o function component com o redux
 export default connect(mapStateToProps)(RadarLayer);

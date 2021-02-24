@@ -5,67 +5,68 @@ import { connect } from "react-redux";
 import axios from "axios";
 import "leaflet-velocity";
 
-var satelliteLayer = [];
+// Função para cálcular as horas passadas
+const RequestDate = (requestDate, i) => {
+  requestDate.setHours(requestDate.getHours() - 6 + i);
+  let day = requestDate.getDate();
+  let hour = requestDate.getHours();
+  let month = requestDate.getMonth();
+  let year = requestDate.getFullYear();
+  if (day < 10) day = `0${day}`;
+  if (hour < 10) hour = `0${hour}`;
+  if (month < 10) month = `0${month}`;
+  return `${year}${month}${day}${hour}`;
+};
 
 const SatelliteLayer = (props) => {
+  // Array que irá guardar as requisições
+  let satelliteLayer = [];
+
+  // Percebe o contexto (mapa) em que se está
   const context = useLeafletContext();
   const container = context.map;
 
   useEffect(() => {
-    console.log("useeffect");
-    if (satelliteLayer.length !== 0) console.log(satelliteLayer);
-
+    // Carrega as requisições apenas uma vez
     if (satelliteLayer.length === 0) {
-      console.log("INICIANDO");
       for (let i = 1; i <= 6; i++) {
-        console.log("COLETANDO");
         let requestDate = new Date();
-        requestDate.setHours(requestDate.getHours() - 6 + i);
-        let year = requestDate.getFullYear();
-        let month = requestDate.getMonth();
-        let day = requestDate.getDate();
-        let hour = requestDate.getHours();
-        if (hour < 10) hour = `0${hour}`;
-        if (day < 10) day = `0${day}`;
-        if (month < 10) month = `0${month}`;
-        var requestHour = `${year}${month}${day}${hour}`;
+        let requestHour = RequestDate(requestDate, i);
         const url = `https://api-redemet.decea.mil.br/produtos/satelite/realcada?api_key=gdkP7S0gy9sB4JsOLoYe34D52CGyrDzZK3xAWe80&data=${requestHour}`;
         axios.get(url).then((res) => {
           res = res.data;
-          var imageUrl = res.data.satelite[0].path;
-          var imageBounds = [
+          let imageUrl = res.data.satelite[0].path;
+          let imageBounds = [
             [res.data.lat_lon.lat_min, res.data.lat_lon.lon_min],
             [res.data.lat_lon.lat_max, res.data.lat_lon.lon_max],
           ];
+          // Guarda as layers no array satelliteLayer[]
           satelliteLayer[i] = L.imageOverlay(imageUrl, imageBounds);
         });
       }
     }
+
+    // Caso acionado
     if (props.satellite) {
+      // Adicionar a layer respectiva a data
       container.addLayer(satelliteLayer[props.date]);
     }
     return () => {
+      // A cada renderização remove a layer
       if (container.hasLayer(satelliteLayer[props.date]))
         container.removeLayer(satelliteLayer[props.date]);
     };
-  }, [props.satellite, props.date, container]);
+  });
   return null;
 };
 
+// Mapeia os states para props (redux)
 const mapStateToProps = (state) => {
   return {
-    satellite: state.satellite,
     date: state.date,
-    loadingSatellite: state.loadingSatellite,
-    time: state.time,
-  };
-};
-const mapDispatchToProps = (dispatch) => {
-  return {
-    LoadingSatellite: (e) => {
-      dispatch({ type: "LOADINGSATELLITE", payLoad: e });
-    },
+    satellite: state.satellite,
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SatelliteLayer);
+// Conecta o componente com o reducer
+export default connect(mapStateToProps)(SatelliteLayer);
