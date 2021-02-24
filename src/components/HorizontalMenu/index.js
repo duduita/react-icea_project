@@ -60,7 +60,7 @@ const HorizontalMenu = (props) => {
                 step={16.66}
                 value={props.date * 16.66}
                 valueLabelDisplay="off"
-              />{" "}
+              />
             </Grid>
             <Timeline props={props} />
           </div>

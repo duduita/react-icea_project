@@ -4,7 +4,7 @@ import "./styles.css";
 
 const Timeline = (props) => {
   return (
-    <div>
+    <div class="timeline">
       <table
         className="table table-borderless"
         style={{

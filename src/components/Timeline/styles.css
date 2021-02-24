@@ -17,3 +17,9 @@ td {
   color: #4c4949;
   text-align: center;
 }
+
+.timeline {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

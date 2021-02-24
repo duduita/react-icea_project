@@ -21,7 +21,11 @@ const PlayButton = (props) => {
       color="primary"
       onClick={(e) => props.Play(props.playing)}
     >
-      <PlayCircleFilledIcon style={styles.button} />
+      {props.playing ? (
+        <PlayCircleFilledIcon style={styles.button} />
+      ) : (
+        <PlayCircleFilledIcon style={styles.button} />
+      )}
     </IconButton>
   );
 };
