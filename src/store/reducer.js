@@ -1,6 +1,6 @@
 // Configurando tamanho da timeline em %
 const bigScale = 80;
-const smallScale = 50;
+const smallScale = 80;
 
 // Estados iniciais das variáveis
 const initialState = {
@@ -76,6 +76,12 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       date: action.payLoad + 1,
+    };
+  }
+  if (action.type === "RESETDATE") {
+    return {
+      ...state,
+      date: 1,
     };
   }
   if (action.type === "WINDGLOBAL") {

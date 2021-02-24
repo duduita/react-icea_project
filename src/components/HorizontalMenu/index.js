@@ -46,6 +46,7 @@ const HorizontalMenu = (props) => {
         clearInterval(idVar);
       }, 1000);
     }
+    if (props.date == 6) props.ResetDate();
   }, [props]);
 
   return (
@@ -87,6 +88,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     PlusDate: (e) => {
       dispatch({ type: "PLUSDATE", payLoad: e });
+    },
+    ResetDate: (e) => {
+      dispatch({ type: "RESETDATE", payLoad: e });
     },
   };
 };

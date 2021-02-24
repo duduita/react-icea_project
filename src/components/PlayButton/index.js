@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
+import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
 import { IconButton } from "@material-ui/core";
 
 const styles = {
@@ -21,10 +22,10 @@ const PlayButton = (props) => {
       color="primary"
       onClick={(e) => props.Play(props.playing)}
     >
-      {props.playing ? (
+      {!props.playing ? (
         <PlayCircleFilledIcon style={styles.button} />
       ) : (
-        <PlayCircleFilledIcon style={styles.button} />
+        <PauseCircleFilledIcon style={styles.button} />
       )}
     </IconButton>
   );
