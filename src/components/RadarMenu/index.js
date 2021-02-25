@@ -51,12 +51,12 @@ const RadarMenu = (props) => {
     // Lógica para alterar o date a partir do play
     if (props.radarPlaying && props.radarDate < 6) {
       let idVar = setInterval(() => {
-        props.PlusDate2({ date: props.radarDate, menuType: "radar" });
+        props.PLUSDATE({ date: props.radarDate, menuType: "radar" });
         clearInterval(idVar);
       }, 1000);
     }
     if (props.radarDate == 6 && props.radarPlaying)
-      props.ResetDate2({ menuType: "radar" });
+      props.RESETDATE({ menuType: "radar" });
   }, [props]);
 
   return (
@@ -65,7 +65,7 @@ const RadarMenu = (props) => {
         <IconButton
           color="primary"
           onClick={() =>
-            props.Play2({
+            props.PLAY({
               playing: props.radarPlaying,
               menuType: "radar",
             })
@@ -109,14 +109,14 @@ const mapStateToProps = (state) => {
 // Mapeia as funções para propriedades (redux)
 const mapDispatchToProps = (dispatch) => {
   return {
-    PlusDate2: (e) => {
-      dispatch({ type: "PLUSDATE2", payLoad: e.date, menuType: e.menuType });
+    PLUSDATE: (e) => {
+      dispatch({ type: "PLUSDATE", payLoad: e.date, menuType: e.menuType });
     },
-    ResetDate2: (e) => {
-      dispatch({ type: "RESETDATE2", payLoad: e.date, menuType: e.menuType });
+    RESETDATE: (e) => {
+      dispatch({ type: "RESETDATE", payLoad: e.date, menuType: e.menuType });
     },
-    Play2: (e) => {
-      dispatch({ type: "PLAY2", payLoad: e.playing, menuType: e.menuType });
+    PLAY: (e) => {
+      dispatch({ type: "PLAY", payLoad: e.playing, menuType: e.menuType });
     },
   };
 };

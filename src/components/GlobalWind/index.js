@@ -13,9 +13,9 @@ const GlobalWind = (props) => {
   const container = context.map;
   useEffect(() => {
     // Verifica se o mapa está ativado
-    if (props.windGlobal) {
+    if (props.wind) {
       // Carrega a url referente à data da timeline
-      const url = `data/globalWind${props.date}.json`;
+      const url = `data/globalWind${props.windDate}.json`;
       axios
         .get(url)
         .then((resp) => {
@@ -45,8 +45,8 @@ const GlobalWind = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    windGlobal: state.windGlobal,
-    date: state.date,
+    wind: state.wind,
+    windDate: state.windDate,
   };
 };
 

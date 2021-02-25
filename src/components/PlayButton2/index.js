@@ -18,7 +18,7 @@ const PlayButton2 = (props) => {
       aria-label="delete"
       color="primary"
       onClick={() =>
-        props.Play2({ playing: props.radarPlaying, menuType: props.menuType })
+        props.PLAY({ playing: props.radarPlaying, menuType: props.menuType })
       }
     >
       {!props.radarPlaying ? (
@@ -40,8 +40,8 @@ const mapStateToProps = (state) => {
 // Mapeia as funções para propriedades (redux)
 const mapDispatchToProps = (dispatch) => {
   return {
-    Play2: (e) => {
-      dispatch({ type: "PLAY2", payLoad: e.playing, menuType: e.menuType });
+    PLAY: (e) => {
+      dispatch({ type: "PLAY", payLoad: e.playing, menuType: e.menuType });
     },
   };
 };

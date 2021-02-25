@@ -3,7 +3,7 @@ import "./styles.css";
 import WindMenu from "../WindMenu";
 import RadarMenu from "../RadarMenu";
 import SatelliteMenu from "../SatelliteMenu";
-import TempMenu from "../SatelliteMenu";
+import TempMenu from "../TempMenu";
 import { connect } from "react-redux";
 
 const HorizontalMenu = (props) => {

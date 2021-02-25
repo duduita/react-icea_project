@@ -1,21 +1,21 @@
 // Estados iniciais das variáveis
 const initialState = {
-  windMenu: false,
-  windGlobal: false,
-  windGlobalTime: 1,
-  temp: false,
-  windTest: false,
-  precipitationMenu: false,
   date: 1,
-  date2: 1,
+  precipitationMenu: false,
+  radar: false,
   radarDate: 1,
+  radarPlaying: false,
   satellite: false,
-  playing: false,
   satelliteDate: 1,
   satellitePlaying: false,
-  radarPlaying: false,
-  radar: false,
   scaleType: "model",
+  temp: false,
+  tempDate: 1,
+  tempPlaying: false,
+  windDate: 1,
+  windMenu: false,
+  wind: false,
+  windTest: false,
 };
 
 // Máquina de estados do redux
@@ -76,32 +76,8 @@ const reducer = (state = initialState, action) => {
       };
     }
   }
-  if (action.type === "PLAY") {
-    if (!action.payLoad) {
-      return {
-        ...state,
-        playing: true,
-      };
-    } else {
-      return {
-        ...state,
-        playing: false,
-      };
-    }
-  }
+
   if (action.type === "PLUSDATE") {
-    return {
-      ...state,
-      date: action.payLoad + 1,
-    };
-  }
-  if (action.type === "RESETDATE") {
-    return {
-      ...state,
-      date: 1,
-    };
-  }
-  if (action.type === "PLUSDATE2") {
     switch (action.menuType) {
       case "radar":
         return {
@@ -113,11 +89,26 @@ const reducer = (state = initialState, action) => {
           ...state,
           satelliteDate: action.payLoad + 1,
         };
+      case "wind":
+        return {
+          ...state,
+          windDate: action.payLoad + 1,
+        };
+      case "temp":
+        return {
+          ...state,
+          tempDate: action.payLoad + 1,
+        };
+      case "ppt":
+        return {
+          ...state,
+          pptDate: action.payLoad + 1,
+        };
       default:
         return { ...state };
     }
   }
-  if (action.type === "RESETDATE2") {
+  if (action.type === "RESETDATE") {
     switch (action.menuType) {
       case "radar":
         return {
@@ -129,6 +120,21 @@ const reducer = (state = initialState, action) => {
           ...state,
           satelliteDate: 1,
         };
+      case "temp":
+        return {
+          ...state,
+          tempDate: 1,
+        };
+      case "ppt":
+        return {
+          ...state,
+          pptDate: 1,
+        };
+      case "wind":
+        return {
+          ...state,
+          windDate: 1,
+        };
       default:
         return { ...state };
     }
@@ -137,13 +143,13 @@ const reducer = (state = initialState, action) => {
     if (!action.payLoad) {
       return {
         ...state,
-        windGlobal: true,
+        wind: true,
         scaleType: "model",
       };
     } else {
       return {
         ...state,
-        windGlobal: false,
+        wind: false,
         scaleType: "model",
       };
     }
@@ -179,12 +185,6 @@ const reducer = (state = initialState, action) => {
     }
   }
   if (action.type === "CHANGEDATE") {
-    return {
-      ...state,
-      date: action.payLoad,
-    };
-  }
-  if (action.type === "CHANGEDATE2") {
     switch (action.menuType) {
       case "radar":
         return {
@@ -196,13 +196,23 @@ const reducer = (state = initialState, action) => {
           ...state,
           satelliteDate: action.payLoad,
         };
+      case "wind":
+        return {
+          ...state,
+          windDate: action.payLoad,
+        };
+      case "temp":
+        return {
+          ...state,
+          tempDate: action.payLoad,
+        };
       default:
         return {
           ...state,
         };
     }
   }
-  if (action.type === "PLAY2") {
+  if (action.type === "PLAY") {
     switch (action.menuType) {
       case "radar":
         if (!action.payLoad) {
@@ -226,6 +236,42 @@ const reducer = (state = initialState, action) => {
           return {
             ...state,
             satellitePlaying: false,
+          };
+        }
+      case "temp":
+        if (!action.payLoad) {
+          return {
+            ...state,
+            tempPlaying: true,
+          };
+        } else {
+          return {
+            ...state,
+            tempPlaying: false,
+          };
+        }
+      case "wind":
+        if (!action.payLoad) {
+          return {
+            ...state,
+            windPlaying: true,
+          };
+        } else {
+          return {
+            ...state,
+            windPlaying: false,
+          };
+        }
+      case "ppt":
+        if (!action.payLoad) {
+          return {
+            ...state,
+            pptPlaying: true,
+          };
+        } else {
+          return {
+            ...state,
+            pptPlaying: false,
           };
         }
       default:

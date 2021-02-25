@@ -6,6 +6,7 @@
   -o-transition: 0.2s linear;
   transition: 0.2s linear;
   justify-content: center;
+  border-radius: 15px;
 }
 
 .date-item:hover {
