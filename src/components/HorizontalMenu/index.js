@@ -2,6 +2,7 @@ import React from "react";
 import "./styles.css";
 import WindMenu from "../WindMenu";
 import RadarMenu from "../RadarMenu";
+import SatelliteMenu from "../SatelliteMenu";
 import { connect } from "react-redux";
 
 const HorizontalMenu = (props) => {
@@ -9,6 +10,7 @@ const HorizontalMenu = (props) => {
     <div class="menus">
       {props.windMenu ? <WindMenu /> : null}
       {props.radar ? <RadarMenu /> : null}
+      {props.radar ? <SatelliteMenu /> : null}
     </div>
   );
 };

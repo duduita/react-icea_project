@@ -10,6 +10,7 @@ const initialState = {
   radarDate: 1,
   satellite: false,
   playing: false,
+  satelliteDate: 1,
   radarPlaying: false,
   radar: false,
   scaleType: "model",
@@ -90,6 +91,11 @@ const reducer = (state = initialState, action) => {
           ...state,
           radarDate: action.payLoad + 1,
         };
+      case "satellite":
+        return {
+          ...state,
+          satelliteDate: action.payLoad + 1,
+        };
       default:
         return { ...state };
     }
@@ -100,6 +106,11 @@ const reducer = (state = initialState, action) => {
         return {
           ...state,
           radarDate: 1,
+        };
+      case "satellite":
+        return {
+          ...state,
+          satelliteDate: 1,
         };
       default:
         return { ...state };
@@ -162,6 +173,11 @@ const reducer = (state = initialState, action) => {
         return {
           ...state,
           radarDate: action.payLoad,
+        };
+      case "satellite":
+        return {
+          ...state,
+          satelliteDate: action.payLoad,
         };
       default:
         return {
