@@ -95,10 +95,15 @@ const reducer = (state = initialState, action) => {
     }
   }
   if (action.type === "RESETDATE2") {
-    return {
-      ...state,
-      date2: 1,
-    };
+    switch (action.menuType) {
+      case "radar":
+        return {
+          ...state,
+          radarDate: 1,
+        };
+      default:
+        return { ...state };
+    }
   }
   if (action.type === "WINDGLOBAL") {
     if (!action.payLoad) {

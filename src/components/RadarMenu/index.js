@@ -45,7 +45,8 @@ const RadarMenu = (props) => {
         clearInterval(idVar);
       }, 1000);
     }
-    if (props.radarDate == 6 && props.radarPlaying) props.ResetDate2();
+    if (props.radarDate == 6 && props.radarPlaying)
+      props.ResetDate2({ menuType: "radar" });
   }, [props]);
 
   return (
@@ -84,7 +85,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "PLUSDATE2", payLoad: e.date, menuType: e.menuType });
     },
     ResetDate2: (e) => {
-      dispatch({ type: "RESETDATE2", payLoad: e });
+      dispatch({ type: "RESETDATE2", payLoad: e.date, menuType: e.menuType });
     },
   };
 };
