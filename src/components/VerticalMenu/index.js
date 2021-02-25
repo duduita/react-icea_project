@@ -14,6 +14,7 @@ const VerticalMenu = (props) => {
             className="icon"
             id="temperature"
             name="Temperatura"
+            onClick={(e) => props.ActiveTemp(props.temp)}
             src="assets/sun.svg"
           />{" "}
           <ButtonWithIcon
@@ -128,6 +129,7 @@ const mapStateToProps = (state) => {
     windMenu: state.windMenu,
     windGlobal: state.windGlobal,
     satellite: state.satellite,
+    temp: state.temp,
     radar: state.radar,
     precipitationMenu: state.precipitationMenu,
   };
@@ -140,6 +142,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     ActiveSatellite: (e) => {
       dispatch({ type: "SATELLITE", payLoad: e });
+    },
+    ActiveTemp: (e) => {
+      dispatch({ type: "TEMP", payLoad: e });
     },
     ActiveRadar: (e) => {
       dispatch({ type: "RADAR", payLoad: e });

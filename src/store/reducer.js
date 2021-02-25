@@ -3,6 +3,7 @@ const initialState = {
   windMenu: false,
   windGlobal: false,
   windGlobalTime: 1,
+  temp: false,
   windTest: false,
   precipitationMenu: false,
   date: 1,
@@ -56,6 +57,21 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         radar: false,
+        scaleType: "redemet",
+      };
+    }
+  }
+  if (action.type === "TEMP") {
+    if (!action.payLoad) {
+      return {
+        ...state,
+        temp: true,
+        scaleType: "redemet",
+      };
+    } else {
+      return {
+        ...state,
+        temp: false,
         scaleType: "redemet",
       };
     }

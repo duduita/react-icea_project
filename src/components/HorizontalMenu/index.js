@@ -3,6 +3,7 @@ import "./styles.css";
 import WindMenu from "../WindMenu";
 import RadarMenu from "../RadarMenu";
 import SatelliteMenu from "../SatelliteMenu";
+import TempMenu from "../SatelliteMenu";
 import { connect } from "react-redux";
 
 const HorizontalMenu = (props) => {
@@ -10,7 +11,8 @@ const HorizontalMenu = (props) => {
     <div class="menus">
       {props.windMenu ? <WindMenu /> : null}
       {props.radar ? <RadarMenu /> : null}
-      {props.satellite ? <SatelliteMenu /> : null}
+      {props.satellite ? <SatelliteMenu /> : null}{" "}
+      {props.temp ? <TempMenu /> : null}
     </div>
   );
 };
@@ -23,6 +25,7 @@ const mapStateToProps = (state) => {
     windMenu: state.windMenu,
     radar: state.radar,
     satellite: state.satellite,
+    temp: state.temp,
   };
 };
 
