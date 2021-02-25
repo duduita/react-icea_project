@@ -65,6 +65,10 @@ const RadarMenu = (props) => {
           </ThemeProvider>
           <Timeline2 props={props} menuType="radar" />
         </div>
+        <div className="info">
+          <img className="radar-icon" alt="wind" src="assets/radar.svg" />{" "}
+          Maxxcappi
+        </div>
       </div>
     </div>
   );

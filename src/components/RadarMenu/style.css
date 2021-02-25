@@ -24,3 +24,14 @@
   flex-wrap: wrap;
   width: 80%;
 }
+
+.info {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.radar-icon {
+  height: 30px;
+  width: 30px;
+  color: #1f5dc2;
+}
