@@ -1,6 +1,5 @@
 // Estados iniciais das variáveis
 const initialState = {
-  date: 1,
   precipitationMenu: false,
   radar: false,
   radarDate: 1,

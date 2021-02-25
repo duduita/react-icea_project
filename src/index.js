@@ -31,6 +31,7 @@ ReactDOM.render(
         scrollWheelZoom={true}
       >
         <BasemapLayer name="DarkGray" />
+
         <GlobalWind />
         <TestWind />
         <SatelliteLayer />

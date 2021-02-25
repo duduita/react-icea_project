@@ -11,7 +11,7 @@ const TestWind = (props) => {
   const container = context.map;
   useEffect(() => {
     if (props.windTest) {
-      const url = `data/testWind${props.windDate}.json`;
+      const url = `data/testWind${props.date}.json`;
       axios
         .get(url)
         .then((resp) => {
@@ -23,7 +23,7 @@ const TestWind = (props) => {
               displayEmptyString: "No wind data",
             },
             data: resp.data,
-            maxVelocity: 10, // Look that
+            maxVelocity: 25,
           });
         })
         .then(() => {
@@ -41,7 +41,7 @@ const TestWind = (props) => {
 const mapStateToProps = (state) => {
   return {
     windTest: state.windTest,
-    windDate: state.windDate,
+    date: state.date,
   };
 };
 const mapDispatchToProps = (dispatch) => {
