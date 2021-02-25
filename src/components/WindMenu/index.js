@@ -62,6 +62,9 @@ const WindMenu = (props) => {
           </ThemeProvider>
           <Timeline props={props} />
         </div>
+        <div className="info">
+          <img className="wind-icon" alt="wind" src="assets/cloud.svg" /> Vento
+        </div>
       </div>
     </div>
   );

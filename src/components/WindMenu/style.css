@@ -2,6 +2,11 @@
   display: flex;
   justify-content: center;
   width: 100%;
+  -webkit-transition: 0.2s linear;
+  -moz-transition: 0.2s linear;
+  -ms-transition: 0.2s linear;
+  -o-transition: 0.2s linear;
+  transition: 0.2s linear;
 }
 
 .submenu {
@@ -23,4 +28,14 @@
   align-content: center;
   flex-wrap: wrap;
   width: 80%;
+}
+
+.info {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.wind-icon {
+  height: 40px;
+  width: 40px;
 }

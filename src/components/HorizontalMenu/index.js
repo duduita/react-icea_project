@@ -4,7 +4,7 @@ import WindMenu from "../WindMenu";
 import RadarMenu from "../RadarMenu";
 import { connect } from "react-redux";
 
-const Menus = (props) => {
+const HorizontalMenu = (props) => {
   return (
     <div class="menus">
       {props.windMenu ? <WindMenu /> : null}
@@ -24,4 +24,4 @@ const mapStateToProps = (state) => {
 };
 
 // Conecta o function component com o redux
-export default connect(mapStateToProps)(Menus);
+export default connect(mapStateToProps)(HorizontalMenu);
