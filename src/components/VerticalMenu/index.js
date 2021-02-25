@@ -16,7 +16,7 @@ const VerticalMenu = (props) => {
             name="Temperatura"
             onClick={(e) => props.ActiveTemp(props.temp)}
             src="assets/sun.svg"
-          />{" "}
+          />
           <ButtonWithIcon
             alt="satellite"
             className="icon"
@@ -63,7 +63,7 @@ const VerticalMenu = (props) => {
                     props.WindTest(props.windTest);
                   }}
                   src="assets/wind.svg"
-                />{" "}
+                />
                 <ButtonWithIcon
                   alt="australia"
                   className="small-icon"
@@ -84,12 +84,7 @@ const VerticalMenu = (props) => {
                 props.TogglePrecipitation(props.precipitationMenu)
               }
             >
-              {" "}
-              <img
-                className="icon"
-                alt="precipitation"
-                src="assets/rain.svg"
-              />{" "}
+              <img className="icon" alt="precipitation" src="assets/rain.svg" />
               Precipitação
             </a>
             {props.precipitationMenu ? (

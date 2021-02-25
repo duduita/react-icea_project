@@ -31,7 +31,6 @@ nav ul li {
 }
 nav ul li a {
   border-radius: 15px;
-
   display: block;
   padding: 10px 15px;
   color: #000;
@@ -44,10 +43,9 @@ nav ul li a {
 }
 nav ul li a:hover {
   border-radius: 15px;
-
   background: #f8f8f8;
   opacity: 80%;
-  color: #515151;
+  color: #1f5dc2;
 }
 
 nav ul ul {
@@ -55,7 +53,6 @@ nav ul ul {
 }
 nav ul li ul li a {
   border-radius: 0px;
-
   background: #f8f8f8;
   opacity: 50%;
   border-left: 0px solid transparent;
@@ -63,7 +60,6 @@ nav ul li ul li a {
 }
 nav ul li ul li a:hover {
   border-radius: 0px;
-
   background: #ebebeb;
   border-left: 4px solid #1f5dc2;
 }
@@ -71,7 +67,6 @@ nav ul li ul li a:hover {
 .icon {
   height: 30px;
   width: 30px;
-  color: #1f5dc2;
 }
 
 .small-icon {
