@@ -91,7 +91,7 @@ const RadarMenu = (props) => {
         </div>
         <div className="info">
           <img className="radar-icon" alt="wind" src="assets/radar.svg" />{" "}
-          Maxxcappi
+          <div className="badge">Maxxcappi</div>
         </div>
       </div>
     </div>

@@ -63,7 +63,8 @@ const WindMenu = (props) => {
           <Timeline props={props} />
         </div>
         <div className="info">
-          <img className="wind-icon" alt="wind" src="assets/cloud.svg" /> Vento
+          <img className="wind-icon" alt="wind" src="assets/cloud.svg" />{" "}
+          <div className="badge">Vento</div>
         </div>
       </div>
     </div>

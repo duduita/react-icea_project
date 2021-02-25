@@ -93,8 +93,8 @@ const SatelliteMenu = (props) => {
             className="satellite-icon"
             alt="wind"
             src="assets/satellite.svg"
-          />{" "}
-          Realçada
+          />
+          <div className="badge">Realçada</div>
         </div>
       </div>
     </div>

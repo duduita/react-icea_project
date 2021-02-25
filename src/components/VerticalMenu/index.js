@@ -47,7 +47,7 @@ const VerticalMenu = (props) => {
                   alt="globe"
                   className="small-icon"
                   id="globe"
-                  name="Globo"
+                  name=" Nordeste"
                   onClick={(e) => {
                     props.WindGlobal(props.windGlobal);
                   }}
@@ -57,7 +57,17 @@ const VerticalMenu = (props) => {
                   alt="australia"
                   className="small-icon"
                   id="australia"
-                  name="Teste"
+                  name=" Norte"
+                  onClick={(e) => {
+                    props.WindTest(props.windTest);
+                  }}
+                  src="assets/wind.svg"
+                />{" "}
+                <ButtonWithIcon
+                  alt="australia"
+                  className="small-icon"
+                  id="australia"
+                  name=" Sul / Sudeste"
                   onClick={(e) => {
                     props.WindTest(props.windTest);
                   }}
