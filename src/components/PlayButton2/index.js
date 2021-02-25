@@ -17,8 +17,8 @@ const PlayButton2 = (props) => {
     <IconButton
       aria-label="delete"
       color="primary"
-      onClick={(e) =>
-        props.Play2({ date: props.date, menuType: props.menuType })
+      onClick={() =>
+        props.Play2({ playing: props.radarPlaying, menuType: props.menuType })
       }
     >
       {!props.radarPlaying ? (
@@ -41,7 +41,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     Play2: (e) => {
-      dispatch({ type: "PLAY2", payLoad: e.date, menuType: e.menuType });
+      dispatch({ type: "PLAY2", payLoad: e.playing, menuType: e.menuType });
     },
   };
 };

@@ -11,6 +11,7 @@ const initialState = {
   satellite: false,
   playing: false,
   satelliteDate: 1,
+  satellitePlaying: false,
   radarPlaying: false,
   radar: false,
   scaleType: "model",
@@ -197,6 +198,18 @@ const reducer = (state = initialState, action) => {
           return {
             ...state,
             radarPlaying: false,
+          };
+        }
+      case "satellite":
+        if (!action.payLoad) {
+          return {
+            ...state,
+            satellitePlaying: true,
+          };
+        } else {
+          return {
+            ...state,
+            satellitePlaying: false,
           };
         }
       default:

@@ -5,7 +5,17 @@ import { Slider, Grid } from "@material-ui/core";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import Timeline2 from "../Timeline2";
-import PlayButton2 from "../PlayButton2";
+import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
+import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
+import { IconButton } from "@material-ui/core";
+
+const styles = {
+  button: {
+    width: 64,
+    height: 64,
+    color: "#2066CC",
+  },
+};
 
 // Estilizando o slider
 const muiTheme = createMuiTheme({
@@ -52,7 +62,21 @@ const RadarMenu = (props) => {
   return (
     <div className="bottom2">
       <div className="options">
-        <PlayButton2 props={props} menuType="radar" />
+        <IconButton
+          color="primary"
+          onClick={() =>
+            props.Play2({
+              playing: props.radarPlaying,
+              menuType: "radar",
+            })
+          }
+        >
+          {!props.radarPlaying ? (
+            <PlayCircleFilledIcon style={styles.button} />
+          ) : (
+            <PauseCircleFilledIcon style={styles.button} />
+          )}
+        </IconButton>
         <div className="slider">
           <ThemeProvider theme={muiTheme}>
             <Grid container justify="center">
@@ -90,6 +114,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     ResetDate2: (e) => {
       dispatch({ type: "RESETDATE2", payLoad: e.date, menuType: e.menuType });
+    },
+    Play2: (e) => {
+      dispatch({ type: "PLAY2", payLoad: e.playing, menuType: e.menuType });
     },
   };
 };

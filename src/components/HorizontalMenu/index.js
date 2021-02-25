@@ -10,7 +10,7 @@ const HorizontalMenu = (props) => {
     <div class="menus">
       {props.windMenu ? <WindMenu /> : null}
       {props.radar ? <RadarMenu /> : null}
-      {props.radar ? <SatelliteMenu /> : null}
+      {props.satellite ? <SatelliteMenu /> : null}
     </div>
   );
 };
@@ -22,6 +22,7 @@ const mapStateToProps = (state) => {
     radarPlaying: state.radarPlaying,
     windMenu: state.windMenu,
     radar: state.radar,
+    satellite: state.satellite,
   };
 };
 
