@@ -12,14 +12,16 @@ const styles = {
   },
 };
 
-const PlayButton = (props) => {
+const PlayButton2 = (props) => {
   return (
     <IconButton
       aria-label="delete"
       color="primary"
-      onClick={(e) => props.Play(props.playing)}
+      onClick={(e) =>
+        props.Play2({ date: props.date, menuType: props.menuType })
+      }
     >
-      {!props.playing ? (
+      {!props.radarPlaying ? (
         <PlayCircleFilledIcon style={styles.button} />
       ) : (
         <PauseCircleFilledIcon style={styles.button} />
@@ -31,18 +33,18 @@ const PlayButton = (props) => {
 // Mapeia os estados para propriedades (redux)
 const mapStateToProps = (state) => {
   return {
-    playing: state.playing,
+    radarPlaying: state.radarPlaying,
   };
 };
 
 // Mapeia as funções para propriedades (redux)
 const mapDispatchToProps = (dispatch) => {
   return {
-    Play: (e) => {
-      dispatch({ type: "PLAY", payLoad: e });
+    Play2: (e) => {
+      dispatch({ type: "PLAY2", payLoad: e.date, menuType: e.menuType });
     },
   };
 };
 
 // Conecta o function component com o redux
-export default connect(mapStateToProps, mapDispatchToProps)(PlayButton);
+export default connect(mapStateToProps, mapDispatchToProps)(PlayButton2);

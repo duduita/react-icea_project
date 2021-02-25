@@ -6,7 +6,7 @@ import { createStore } from "redux";
 import reducer from "./store/reducer";
 import { MapContainer } from "react-leaflet";
 import VerticalMenu from "./components/VerticalMenu";
-import HorizontalMenu from "./components/HorizontalMenu";
+import Menus from "./components/Menus";
 import "leaflet-velocity";
 import GlobalWind from "./components/GlobalWind";
 import "react-leaflet";
@@ -22,7 +22,7 @@ const store = createStore(reducer);
 ReactDOM.render(
   <Provider store={store}>
     <div class="app">
-      <HorizontalMenu />
+      <Menus />
       <VerticalMenu />
       <MapContainer
         style={{ height: "100%", width: "100%" }}

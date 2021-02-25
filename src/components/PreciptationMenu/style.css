@@ -1,14 +1,8 @@
-.parent {
-  display: flex;
-  justify-content: center;
-}
-
 .bottom {
   background: #ebebeb;
-  bottom: 10px;
   border-radius: 15px;
+  margin-bottom: 5px;
   opacity: 50%;
-  position: absolute;
   width: 60%;
   z-index: 1000;
 }

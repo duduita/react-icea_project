@@ -49,12 +49,12 @@ const SatelliteLayer = (props) => {
     // Caso acionado
     if (props.satellite) {
       // Adicionar a layer respectiva a data
-      container.addLayer(satelliteLayer[props.date]);
+      container.addLayer(satelliteLayer[props.date2]);
     }
     return () => {
       // A cada renderização remove a layer
-      if (container.hasLayer(satelliteLayer[props.date]))
-        container.removeLayer(satelliteLayer[props.date]);
+      if (container.hasLayer(satelliteLayer[props.date2]))
+        container.removeLayer(satelliteLayer[props.date2]);
     };
   });
   return null;
@@ -63,7 +63,7 @@ const SatelliteLayer = (props) => {
 // Mapeia os states para props (redux)
 const mapStateToProps = (state) => {
   return {
-    date: state.date,
+    date2: state.date2,
     satellite: state.satellite,
   };
 };

@@ -2,40 +2,37 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import "./style.css";
 import { Slider, Grid } from "@material-ui/core";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
 import Timeline from "../Timeline";
 import PlayButton from "../PlayButton";
 
-const HorizontalMenu = (props) => {
-  // Variáveis que regem o tamanho da timeline em %
-  const bigSize = 80;
-  const smallSize = 50;
+// Estilizando o slider
+const muiTheme = createMuiTheme({
+  overrides: {
+    MuiSlider: {
+      thumb: {
+        color: "#1f5dc2",
+      },
+      track: {
+        color: "#2066CC",
+      },
+    },
+  },
+});
+
+const WindMenu = (props) => {
   // Variáveis que vão guardar as datas futuras (modelo) e horas passadas (RedeMET)
-  let futureDays;
-  let pastHours;
+  let futureDays = new Date();
   useEffect(() => {
-    if (props.scale === 80) {
-      // Lógica para obter os próprios dias
-      futureDays = new Date();
-      let weekDays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
-      for (let i = 1; i <= 6; i++) {
-        futureDays.setDate(new Date().getDate() + i - 1);
-        document.getElementById(`date-${i}`).innerHTML = `${
-          weekDays[futureDays.getDay()]
-        } ${futureDays.getDate()}`;
-      }
-    } else {
+    // Lógica para obter os próprios dias
+    let weekDays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+    for (let i = 1; i <= 6; i++) {
+      futureDays.setDate(new Date().getDate() + i - 1);
+      document.getElementById(`date-${i}`).innerHTML = `${
+        weekDays[futureDays.getDay()]
+      } ${futureDays.getDate()}`;
       // Lógica para obter as horas passadas
-      for (let i = 1; i <= 6; i++) {
-        pastHours = new Date();
-        pastHours.setDate(pastHours.getHours() - 6 + i);
-        document.getElementById(
-          `date-${i}`
-        ).innerHTML = `${pastHours.getDate()}:${
-          pastHours.getMinutes() < 10
-            ? `0${pastHours.getMinutes()}`
-            : pastHours.getMinutes()
-        }h`;
-      }
     }
   });
   useEffect(() => {
@@ -46,25 +43,24 @@ const HorizontalMenu = (props) => {
         clearInterval(idVar);
       }, 1000);
     }
-    if (props.date == 6) props.ResetDate();
+    if (props.date == 6 && props.playing) props.ResetDate();
   }, [props]);
 
   return (
-    <div className="parent">
-      <div className="bottom">
-        <div className="options">
-          <PlayButton props={props} />
-          <div className="slider">
+    <div className="bottom">
+      <div className="options">
+        <PlayButton props={props} />
+        <div className="slider">
+          <ThemeProvider theme={muiTheme}>
             <Grid container justify="center">
               <Slider
                 aria-labelledby="discrete-slider-custom"
-                step={16.66}
                 value={props.date * 16.66}
                 valueLabelDisplay="off"
               />
             </Grid>
-            <Timeline props={props} />
-          </div>
+          </ThemeProvider>
+          <Timeline props={props} />
         </div>
       </div>
     </div>
@@ -77,6 +73,7 @@ const mapStateToProps = (state) => {
     date: state.date,
     playing: state.playing,
     windMenu: state.windMenu,
+    scaleType: state.scaleType,
   };
 };
 
@@ -96,4 +93,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 // Conecta o function component com o redux
-export default connect(mapStateToProps, mapDispatchToProps)(HorizontalMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(WindMenu);

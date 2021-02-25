@@ -55,13 +55,13 @@ const RadarLayer = (props) => {
     }
     // Se cliente solicitou, adicionar ao container (mapa)
     if (props.radar) {
-      container.addLayer(myLayerGroup[props.date]);
+      container.addLayer(myLayerGroup[props.radarDate]);
     }
     // A cada renderização ele remove a layer
     // Para saber mais, pesquise sobre Cleanup do UseEffect
     return () => {
-      if (container.hasLayer(myLayerGroup[props.date]))
-        container.removeLayer(myLayerGroup[props.date]);
+      if (container.hasLayer(myLayerGroup[props.radarDate]))
+        container.removeLayer(myLayerGroup[props.radarDate]);
     };
   });
   return null;
@@ -71,7 +71,7 @@ const RadarLayer = (props) => {
 const mapStateToProps = (state) => {
   return {
     radar: state.radar,
-    date: state.date,
+    radarDate: state.radarDate,
   };
 };
 

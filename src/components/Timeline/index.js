@@ -5,12 +5,7 @@ import "./styles.css";
 const Timeline = (props) => {
   return (
     <div class="timeline">
-      <table
-        className="table table-borderless"
-        style={{
-          width: `${props.scaleSize}%`,
-        }}
-      >
+      <table className="table table-borderless">
         <thead>
           <tr>
             <td

@@ -1,7 +1,3 @@
-// Configurando tamanho da timeline em %
-const bigScale = 80;
-const smallScale = 80;
-
 // Estados iniciais das variáveis
 const initialState = {
   windMenu: false,
@@ -10,10 +6,13 @@ const initialState = {
   windTest: false,
   precipitationMenu: false,
   date: 1,
+  date2: 1,
+  radarDate: 1,
   satellite: false,
   playing: false,
+  radarPlaying: false,
   radar: false,
-  scaleSize: bigScale,
+  scaleType: "model",
 };
 
 // Máquina de estados do redux
@@ -49,13 +48,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         radar: true,
-        scaleSize: smallScale,
+        scaleType: "redemet",
       };
     } else {
       return {
         ...state,
         radar: false,
-        scaleSize: smallScale,
+        scaleType: "redemet",
       };
     }
   }
@@ -84,18 +83,35 @@ const reducer = (state = initialState, action) => {
       date: 1,
     };
   }
+  if (action.type === "PLUSDATE2") {
+    switch (action.menuType) {
+      case "radar":
+        return {
+          ...state,
+          radarDate: action.payLoad + 1,
+        };
+      default:
+        return { ...state };
+    }
+  }
+  if (action.type === "RESETDATE2") {
+    return {
+      ...state,
+      date2: 1,
+    };
+  }
   if (action.type === "WINDGLOBAL") {
     if (!action.payLoad) {
       return {
         ...state,
         windGlobal: true,
-        scaleSize: bigScale,
+        scaleType: "model",
       };
     } else {
       return {
         ...state,
         windGlobal: false,
-        scaleSize: bigScale,
+        scaleType: "model",
       };
     }
   }
@@ -104,13 +120,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         satellite: true,
-        scaleSize: smallScale,
+        scaleType: "redemet",
       };
     } else {
       return {
         ...state,
         satellite: false,
-        scaleSize: smallScale,
+        scaleType: "redemet",
       };
     }
   }
@@ -119,13 +135,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         precipitationMenu: true,
-        scaleSize: bigScale,
+        scaleType: "model",
       };
     } else {
       return {
         ...state,
         precipitationMenu: false,
-        scaleSize: bigScale,
+        scaleType: "model",
       };
     }
   }
@@ -135,7 +151,39 @@ const reducer = (state = initialState, action) => {
       date: action.payLoad,
     };
   }
-
+  if (action.type === "CHANGEDATE2") {
+    switch (action.menuType) {
+      case "radar":
+        return {
+          ...state,
+          radarDate: action.payLoad,
+        };
+      default:
+        return {
+          ...state,
+        };
+    }
+  }
+  if (action.type === "PLAY2") {
+    switch (action.menuType) {
+      case "radar":
+        if (!action.payLoad) {
+          return {
+            ...state,
+            radarPlaying: true,
+          };
+        } else {
+          return {
+            ...state,
+            radarPlaying: false,
+          };
+        }
+      default:
+        return {
+          ...state,
+        };
+    }
+  }
   return state;
 };
 
