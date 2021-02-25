@@ -4,7 +4,7 @@ import "./style.css";
 import { Slider, Grid } from "@material-ui/core";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-import Timeline2 from "../Timeline2";
+import Timeline from "../Timeline";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
 import { IconButton } from "@material-ui/core";
@@ -85,7 +85,7 @@ const WindMenu = (props) => {
               />
             </Grid>
           </ThemeProvider>
-          <Timeline2 props={props} menuType="wind" />
+          <Timeline props={props} menuType="wind" />
         </div>
         <div className="info">
           <img className="wind-icon" alt="wind" src="assets/cloud.svg" />{" "}
