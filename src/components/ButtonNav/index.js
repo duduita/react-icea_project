@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 
-export class ButtonWithIcon extends Component {
+export class ButtonNav extends Component {
   render() {
     return (
       <li>
-        <a id={this.props.id} href="#home" onClick={this.props.onClick}>
+        <a id={this.props.id} href="#home">
           <img
             alt={this.props.alt}
-            className={this.props.className}
+            className={this.props.iconSize}
             src={this.props.src}
           />
           {this.props.name}
         </a>
+        {this.props.children}
       </li>
     );
   }
 }
-
-export default ButtonWithIcon;
+export default ButtonNav;

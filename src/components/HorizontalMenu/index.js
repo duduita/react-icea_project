@@ -1,52 +1,99 @@
-import React, { Component } from "react";
+import { useEffect } from "react";
+import { connect } from "react-redux";
 import "./style.css";
+import { Slider, Grid } from "@material-ui/core";
+import Timeline from "../Timeline";
+import PlayButton from "../PlayButton";
 
-export class HorizontalMenu extends Component {
-  render() {
-    return (
-      <div>
-        <div className="bottom">
-          <div className="options">
-            <button className="btn btn-primary play-button" type="submit">
-              <span id="play" className="glyphicon play glyphicon-play" />
-            </button>
-          </div>
-          <div className="bar">
-            <div
-              id="bar-field"
-              className="progress"
-              style={{ height: "6px", backgroundColor: "#4c4949" }}
-            >
-              <div
-                id="p-bar"
-                className="progress-bar"
-                role="progressbar"
-                style={{
-                  width: "16.66%",
-                  height: "6px ",
-                  backgroundColor: "#e5e5e5"
-                }}
+const HorizontalMenu = (props) => {
+  // Variáveis que regem o tamanho da timeline em %
+  const bigSize = 80;
+  const smallSize = 50;
+  // Variáveis que vão guardar as datas futuras (modelo) e horas passadas (RedeMET)
+  let futureDays;
+  let pastHours;
+  useEffect(() => {
+    if (props.scale === 80) {
+      // Lógica para obter os próprios dias
+      futureDays = new Date();
+      let weekDays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+      for (let i = 1; i <= 6; i++) {
+        futureDays.setDate(new Date().getDate() + i - 1);
+        document.getElementById(`date-${i}`).innerHTML = `${
+          weekDays[futureDays.getDay()]
+        } ${futureDays.getDate()}`;
+      }
+    } else {
+      // Lógica para obter as horas passadas
+      for (let i = 1; i <= 6; i++) {
+        pastHours = new Date();
+        pastHours.setDate(pastHours.getHours() - 6 + i);
+        document.getElementById(
+          `date-${i}`
+        ).innerHTML = `${pastHours.getDate()}:${
+          pastHours.getMinutes() < 10
+            ? `0${pastHours.getMinutes()}`
+            : pastHours.getMinutes()
+        }h`;
+      }
+    }
+  });
+  useEffect(() => {
+    // Lógica para alterar o date a partir do play
+    if (props.playing && props.date < 6) {
+      let idVar = setInterval(() => {
+        props.PlusDate(props.date);
+        clearInterval(idVar);
+      }, 1000);
+    }
+    if (props.date == 6) props.ResetDate();
+  }, [props]);
+
+  return (
+    <div className="parent">
+      <div className="bottom">
+        <div className="options">
+          <PlayButton props={props} />
+          <div className="slider">
+            <Grid container justify="center">
+              <Slider
+                aria-labelledby="discrete-slider-custom"
+                step={16.66}
+                value={props.date * 16.66}
+                valueLabelDisplay="off"
               />
-            </div>
+            </Grid>
+            <Timeline props={props} />
           </div>
-        </div>
-        <div className="scale">
-          <table id="date-line" className="table table-borderless">
-            <thead>
-              <tr className="date">
-                <td id="date-1" className="date-item" scope="col" />
-                <td id="date-2" className="date-item" scope="col" />
-                <td id="date-3" className="date-item" scope="col" />
-                <td id="date-4" className="date-item" scope="col" />
-                <td id="date-5" className="date-item" scope="col" />
-                <td id="date-6" className="date-item" scope="col" />
-              </tr>
-            </thead>
-          </table>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
-export default HorizontalMenu;
+// Mapeia os estados para propriedades (redux)
+const mapStateToProps = (state) => {
+  return {
+    date: state.date,
+    playing: state.playing,
+    windMenu: state.windMenu,
+  };
+};
+
+// Mapeia as funções para propriedades (redux)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    ChangeDate: (e) => {
+      dispatch({ type: "CHANGEDATE", payLoad: e });
+    },
+    PlusDate: (e) => {
+      dispatch({ type: "PLUSDATE", payLoad: e });
+    },
+    ResetDate: (e) => {
+      dispatch({ type: "RESETDATE", payLoad: e });
+    },
+  };
+};
+
+// Conecta o function component com o redux
+export default connect(mapStateToProps, mapDispatchToProps)(HorizontalMenu);
