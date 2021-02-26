@@ -54,13 +54,13 @@ nav ul ul {
 nav ul li ul li a {
   border-radius: 0px;
   background: #f8f8f8;
-  opacity: 50%;
+  opacity: 80%;
   border-left: 0px solid transparent;
   padding: 10px 20px;
 }
 nav ul li ul li a:hover {
   border-radius: 0px;
-  background: #ebebeb;
+  background: #f8f8f8;
   border-left: 4px solid #1f5dc2;
 }
 

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import "leaflet-velocity";
 
-var velocityLayer = [];
+let velocityLayer;
 const TestWind = (props) => {
   const context = useLeafletContext();
   const container = context.map;
@@ -15,7 +15,7 @@ const TestWind = (props) => {
       axios
         .get(url)
         .then((resp) => {
-          velocityLayer[0] = L.velocityLayer({
+          velocityLayer = L.velocityLayer({
             displayValues: true,
             displayOptions: {
               velocityType: "Wind",
@@ -23,16 +23,17 @@ const TestWind = (props) => {
               displayEmptyString: "No wind data",
             },
             data: resp.data,
+            velocityScale: 0.02, // modifier for particle animations, arbitrarily defaults to 0.005
             maxVelocity: 10, // Look that
           });
         })
         .then(() => {
-          container.addLayer(velocityLayer[0]);
+          container.addLayer(velocityLayer);
         });
     }
     return () => {
-      if (container.hasLayer(velocityLayer[0]))
-        container.removeLayer(velocityLayer[0]);
+      if (container.hasLayer(velocityLayer))
+        container.removeLayer(velocityLayer);
     };
   });
 

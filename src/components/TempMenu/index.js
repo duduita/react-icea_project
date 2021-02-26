@@ -11,8 +11,8 @@ import { IconButton } from "@material-ui/core";
 
 const styles = {
   button: {
-    width: 64,
-    height: 64,
+    width: 48,
+    height: 48,
     color: "#2066CC",
   },
 };

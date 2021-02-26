@@ -45,9 +45,9 @@ const VerticalMenu = (props) => {
             {props.windMenu ? (
               <ul>
                 <ButtonWithIcon
-                  alt="globe"
+                  alt="nordeste"
                   className="small-icon"
-                  id="globe"
+                  id="nordeste"
                   name=" Nordeste"
                   onClick={(e) => {
                     props.WindGlobal(props.windGlobal);
@@ -55,9 +55,9 @@ const VerticalMenu = (props) => {
                   src="assets/wind.svg"
                 />
                 <ButtonWithIcon
-                  alt="australia"
+                  alt="norte"
                   className="small-icon"
-                  id="australia"
+                  id="norte"
                   name=" Norte"
                   onClick={(e) => {
                     props.WindTest(props.windTest);
@@ -65,9 +65,9 @@ const VerticalMenu = (props) => {
                   src="assets/wind.svg"
                 />
                 <ButtonWithIcon
-                  alt="australia"
+                  alt="sul-sudeste"
                   className="small-icon"
-                  id="australia"
+                  id="sul-sudeste"
                   name=" Sul / Sudeste"
                   onClick={(e) => {
                     props.WindTest(props.windTest);
@@ -104,9 +104,9 @@ const VerticalMenu = (props) => {
                   src="assets/wi-raindrop.svg"
                 />
                 <ButtonWithIcon
-                  alt="australia"
+                  alt="indefinido"
                   className="icon"
-                  id="australia"
+                  id="indefinido"
                   name="Precipitação Convectiva"
                   src="assets/wi-raindrop.svg"
                 />
@@ -121,12 +121,13 @@ const VerticalMenu = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    windMenu: state.windMenu,
-    windGlobal: state.windGlobal,
+    precipitationMenu: state.precipitationMenu,
+    radar: state.radar,
     satellite: state.satellite,
     temp: state.temp,
-    radar: state.radar,
-    precipitationMenu: state.precipitationMenu,
+    windGlobal: state.windGlobal,
+    windMenu: state.windMenu,
+    windTest: state.windTest,
   };
 };
 

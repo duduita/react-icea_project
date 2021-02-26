@@ -28,10 +28,11 @@ ReactDOM.render(
         style={{ height: "100%", width: "100%" }}
         center={[-23.5505, -53]}
         zoom={3}
+        attributionControl={false}
+        addAttribution={"testando"}
         scrollWheelZoom={true}
       >
         <BasemapLayer name="DarkGray" />
-
         <GlobalWind />
         <TestWind />
         <SatelliteLayer />
