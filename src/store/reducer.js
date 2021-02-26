@@ -15,6 +15,7 @@ const initialState = {
   windMenu: false,
   wind: false,
   windTest: false,
+  windSulsudeste: false,
 };
 
 // Máquina de estados do redux
@@ -42,6 +43,19 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         windTest: false,
+      };
+    }
+  }
+  if (action.type === "WINDSULSUDESTE") {
+    if (!action.payLoad) {
+      return {
+        ...state,
+        windSulsudeste: true,
+      };
+    } else {
+      return {
+        ...state,
+        windSulsudeste: false,
       };
     }
   }

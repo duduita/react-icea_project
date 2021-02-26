@@ -15,6 +15,7 @@ import { BasemapLayer } from "react-esri-leaflet";
 import SatelliteLayer from "./components/SatelliteLayer";
 import RadarLayer from "./components/RadarLayer";
 import TestWind from "./components/TestWind";
+import SulsudesteWind from "./components/SulsudesteWind";
 
 // Criando store do redux
 const store = createStore(reducer);
@@ -35,6 +36,7 @@ ReactDOM.render(
         <BasemapLayer name="DarkGray" />
         <GlobalWind />
         <TestWind />
+        <SulsudesteWind />
         <SatelliteLayer />
         <RadarLayer />
       </MapContainer>

@@ -70,7 +70,7 @@ const VerticalMenu = (props) => {
                   id="sul-sudeste"
                   name=" Sul / Sudeste"
                   onClick={(e) => {
-                    props.WindTest(props.windTest);
+                    props.WindSulsudeste(props.windSulsudeste);
                   }}
                   src="assets/wind.svg"
                 />
@@ -128,6 +128,7 @@ const mapStateToProps = (state) => {
     windGlobal: state.windGlobal,
     windMenu: state.windMenu,
     windTest: state.windTest,
+    windSulsudeste: state.windSulsudeste,
   };
 };
 
@@ -153,6 +154,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     WindTest: (e) => {
       dispatch({ type: "WINDTEST", payLoad: e });
+    },
+    WindSulsudeste: (e) => {
+      dispatch({ type: "WINDSULSUDESTE", payLoad: e });
     },
   };
 };
