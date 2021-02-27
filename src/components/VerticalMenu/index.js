@@ -50,7 +50,7 @@ const VerticalMenu = (props) => {
                   id="nordeste"
                   name=" Nordeste"
                   onClick={(e) => {
-                    props.WindGlobal(props.windGlobal);
+                    props.WindNordeste(props.windNordeste);
                   }}
                   src="assets/wind.svg"
                 />
@@ -60,7 +60,7 @@ const VerticalMenu = (props) => {
                   id="norte"
                   name=" Norte"
                   onClick={(e) => {
-                    props.WindTest(props.windTest);
+                    props.WindNorte(props.windNorte);
                   }}
                   src="assets/wind.svg"
                 />
@@ -125,10 +125,10 @@ const mapStateToProps = (state) => {
     radar: state.radar,
     satellite: state.satellite,
     temp: state.temp,
-    windGlobal: state.windGlobal,
     windMenu: state.windMenu,
-    windTest: state.windTest,
+    windNordeste: state.windNordeste,
     windSulsudeste: state.windSulsudeste,
+    windNorte: state.windNorte,
   };
 };
 
@@ -136,6 +136,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     ToggleWind: (e) => {
       dispatch({ type: "TOGGLEWIND", payLoad: e });
+    },
+    TogglePrecipitation: (e) => {
+      dispatch({ type: "TOGGLEPRECIPITATION", payLoad: e });
     },
     ActiveSatellite: (e) => {
       dispatch({ type: "SATELLITE", payLoad: e });
@@ -146,14 +149,11 @@ const mapDispatchToProps = (dispatch) => {
     ActiveRadar: (e) => {
       dispatch({ type: "RADAR", payLoad: e });
     },
-    TogglePrecipitation: (e) => {
-      dispatch({ type: "TOGGLEPRECIPITATION", payLoad: e });
+    WindNordeste: (e) => {
+      dispatch({ type: "WINDNORDESTE", payLoad: e });
     },
-    WindGlobal: (e) => {
-      dispatch({ type: "WINDGLOBAL", payLoad: e });
-    },
-    WindTest: (e) => {
-      dispatch({ type: "WINDTEST", payLoad: e });
+    WindNorte: (e) => {
+      dispatch({ type: "WINDNORTE", payLoad: e });
     },
     WindSulsudeste: (e) => {
       dispatch({ type: "WINDSULSUDESTE", payLoad: e });

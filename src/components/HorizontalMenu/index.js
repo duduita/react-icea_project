@@ -11,7 +11,7 @@ const HorizontalMenu = (props) => {
     <div class="menus">
       {props.windMenu ? <WindMenu /> : null}
       {props.radar ? <RadarMenu /> : null}
-      {props.satellite ? <SatelliteMenu /> : null}{" "}
+      {props.satellite ? <SatelliteMenu /> : null}
       {props.temp ? <TempMenu /> : null}
     </div>
   );
@@ -20,12 +20,10 @@ const HorizontalMenu = (props) => {
 // Mapeia os estados para propriedades (redux)
 const mapStateToProps = (state) => {
   return {
-    radarDate: state.radarDate,
-    radarPlaying: state.radarPlaying,
-    windMenu: state.windMenu,
     radar: state.radar,
     satellite: state.satellite,
     temp: state.temp,
+    windMenu: state.windMenu,
   };
 };
 

@@ -9,6 +9,7 @@ import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
 import { IconButton } from "@material-ui/core";
 
+// Estilizando o play button
 const styles = {
   button: {
     width: 48,
@@ -55,12 +56,13 @@ const RadarMenu = (props) => {
         clearInterval(idVar);
       }, 1000);
     }
+    // Lógica para deixar o player contínuo
     if (props.radarDate == 6 && props.radarPlaying)
       props.RESETDATE({ menuType: "radar" });
   }, [props]);
 
   return (
-    <div className="bottom2">
+    <div className="radar-menu">
       <div className="options">
         <IconButton
           color="primary"
@@ -82,7 +84,7 @@ const RadarMenu = (props) => {
             <Grid container justify="center">
               <Slider
                 aria-labelledby="discrete-slider-custom"
-                value={props.radarDate * 16.66}
+                value={props.radarDate * 16.66} // Altera o tamanho do slider de acordo com o estado da data
                 valueLabelDisplay="off"
               />
             </Grid>
@@ -90,7 +92,7 @@ const RadarMenu = (props) => {
           <Timeline props={props} menuType="radar" />
         </div>
         <div className="info">
-          <img className="radar-icon" alt="wind" src="assets/radar.svg" />{" "}
+          <img className="radar-icon" alt="wind" src="assets/radar.svg" />
           <div className="badge">Maxxcappi</div>
         </div>
       </div>
@@ -99,6 +101,7 @@ const RadarMenu = (props) => {
 };
 
 // Mapeia os estados para propriedades (redux)
+// Estados explicados no reducer
 const mapStateToProps = (state) => {
   return {
     radarPlaying: state.radarPlaying,
@@ -107,6 +110,7 @@ const mapStateToProps = (state) => {
 };
 
 // Mapeia as funções para propriedades (redux)
+// Funções explicadas no reducer
 const mapDispatchToProps = (dispatch) => {
   return {
     PLUSDATE: (e) => {

@@ -5,13 +5,17 @@ import { connect } from "react-redux";
 import axios from "axios";
 import "leaflet-velocity";
 
+// Array que guardará as velocity layers
 let velocityLayer;
-const TestWind = (props) => {
+const NorteWind = (props) => {
+  // Percebe o contexto (mapa) em que se está
   const context = useLeafletContext();
   const container = context.map;
   useEffect(() => {
-    if (props.windTest) {
-      const url = `data/testWind${props.windDate}.json`;
+    // Verifica se o mapa está ativado
+    if (props.windNorte) {
+      // Carrega a url referente à data da timeline
+      const url = `data/norteWind/norteWind${props.windDate}.json`;
       axios
         .get(url)
         .then((resp) => {
@@ -23,8 +27,8 @@ const TestWind = (props) => {
               displayEmptyString: "No wind data",
             },
             data: resp.data,
-            velocityScale: 0.02, // modifier for particle animations, arbitrarily defaults to 0.005
-            maxVelocity: 10, // Look that
+            velocityScale: 0.005, // modifier for particle animations, arbitrarily defaults to 0.005
+            maxVelocity: 25, // Controla a cor das velocity layers
           });
         })
         .then(() => {
@@ -32,6 +36,8 @@ const TestWind = (props) => {
         });
     }
     return () => {
+      // A cada renderização ele remove a layer
+      // Para saber mais, pesquise sobre Cleanup do UseEffect
       if (container.hasLayer(velocityLayer))
         container.removeLayer(velocityLayer);
     };
@@ -41,7 +47,7 @@ const TestWind = (props) => {
 };
 const mapStateToProps = (state) => {
   return {
-    windTest: state.windTest,
+    windNorte: state.windNorte,
     windDate: state.windDate,
   };
 };
@@ -49,4 +55,4 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TestWind);
+export default connect(mapStateToProps, mapDispatchToProps)(NorteWind);

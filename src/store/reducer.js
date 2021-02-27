@@ -1,299 +1,314 @@
 // Estados iniciais das variáveis
+// Data possui 6 estados (1 - 6), dado 6 botões nos HorizontalMenu
+
 const initialState = {
-  precipitationMenu: false,
-  radar: false,
-  radarDate: 1,
-  radarPlaying: false,
-  satellite: false,
-  satelliteDate: 1,
-  satellitePlaying: false,
-  scaleType: "model",
-  temp: false,
-  tempDate: 1,
-  tempPlaying: false,
-  windDate: 1,
-  windMenu: false,
-  wind: false,
-  windTest: false,
-  windSulsudeste: false,
+  windDate: 1, // Seta as datas para o vento
+  windMenu: false, // DropdownMenu aberto/fechado (já abre o horizontal menu quando aberto)
+  windNordeste: false, // Layer ativada/desativada
+  windNorte: false, // Layer ativada/desativada
+  windSulsudeste: false, // Layer ativada/desativada
+
+  satellite: false, // Abre/fecha o satelliteMenu
+  satelliteDate: 1, // Seta as datas para o vento
+  satellitePlaying: false, // Estado do satellitePlayer
+
+  radar: false, // Abre/fecha o radarMenu
+  radarDate: 1, // Seta as datas para o vento
+  radarPlaying: false, // Estado do satellitePlayer
+
+  temp: false, // Abre/fecha o tempMenu
+  tempDate: 1, // Seta as datas para a temperatura
+  tempPlaying: false, // Estado do tempPlayer
+
+  precipitationMenu: false, // DropdownMenu aberto/fechado (já abre o horizontal menu quando aberto)
 };
 
 // Máquina de estados do redux
 const reducer = (state = initialState, action) => {
-  if (action.type === "TOGGLEWIND") {
-    if (!action.payLoad) {
-      return {
-        ...state,
-        windMenu: true,
-      };
-    } else {
-      return {
-        ...state,
-        windMenu: false,
-      };
+  switch (action.type) {
+    case "TOGGLEWIND": {
+      // Abre/fecha o dropdown do windMenu
+      if (!action.payLoad) {
+        return {
+          ...state,
+          windMenu: true,
+        };
+      } else {
+        return {
+          ...state,
+          windMenu: false,
+        };
+      }
     }
-  }
-  if (action.type === "WINDTEST") {
-    if (!action.payLoad) {
-      return {
-        ...state,
-        windTest: true,
-      };
-    } else {
-      return {
-        ...state,
-        windTest: false,
-      };
+    // Abre/fecha o dropdown do precipitationMenu
+    case "TOGGLEPRECIPITATION": {
+      if (!action.payLoad) {
+        alert("Página em construção!");
+        return {
+          ...state,
+          precipitationMenu: true,
+        };
+      } else {
+        return {
+          ...state,
+          precipitationMenu: false,
+        };
+      }
     }
-  }
-  if (action.type === "WINDSULSUDESTE") {
-    if (!action.payLoad) {
-      return {
-        ...state,
-        windSulsudeste: true,
-      };
-    } else {
-      return {
-        ...state,
-        windSulsudeste: false,
-      };
+    // Abre/fecha o satelliteMenu
+    case "SATELLITE": {
+      if (!action.payLoad) {
+        return {
+          ...state,
+          satellite: true,
+        };
+      } else {
+        return {
+          ...state,
+          satellite: false,
+        };
+      }
     }
-  }
-  if (action.type === "RADAR") {
-    if (!action.payLoad) {
-      return {
-        ...state,
-        radar: true,
-        scaleType: "redemet",
-      };
-    } else {
-      return {
-        ...state,
-        radar: false,
-        scaleType: "redemet",
-      };
+    // Abre/fecha o radarMenu
+    case "RADAR": {
+      if (!action.payLoad) {
+        return {
+          ...state,
+          radar: true,
+        };
+      } else {
+        return {
+          ...state,
+          radar: false,
+        };
+      }
     }
-  }
-  if (action.type === "TEMP") {
-    if (!action.payLoad) {
-      return {
-        ...state,
-        temp: true,
-        scaleType: "redemet",
-      };
-    } else {
-      return {
-        ...state,
-        temp: false,
-        scaleType: "redemet",
-      };
+    // Abre/fecha o tempMenu
+    case "TEMP": {
+      if (!action.payLoad) {
+        return {
+          ...state,
+          temp: true,
+        };
+      } else {
+        return {
+          ...state,
+          temp: false,
+        };
+      }
     }
-  }
 
-  if (action.type === "PLUSDATE") {
-    switch (action.menuType) {
-      case "radar":
+    // Ativa/desativa as wind layers
+    case "WINDNORTE": {
+      if (!action.payLoad) {
         return {
           ...state,
-          radarDate: action.payLoad + 1,
+          windNorte: true,
         };
-      case "satellite":
+      } else {
         return {
           ...state,
-          satelliteDate: action.payLoad + 1,
+          windNorte: false,
         };
-      case "wind":
-        return {
-          ...state,
-          windDate: action.payLoad + 1,
-        };
-      case "temp":
-        return {
-          ...state,
-          tempDate: action.payLoad + 1,
-        };
-      case "ppt":
-        return {
-          ...state,
-          pptDate: action.payLoad + 1,
-        };
-      default:
-        return { ...state };
+      }
     }
-  }
-  if (action.type === "RESETDATE") {
-    switch (action.menuType) {
-      case "radar":
+    case "WINDSULSUDESTE": {
+      if (!action.payLoad) {
         return {
           ...state,
-          radarDate: 1,
+          windSulsudeste: true,
         };
-      case "satellite":
+      } else {
         return {
           ...state,
-          satelliteDate: 1,
+          windSulsudeste: false,
         };
-      case "temp":
-        return {
-          ...state,
-          tempDate: 1,
-        };
-      case "ppt":
-        return {
-          ...state,
-          pptDate: 1,
-        };
-      case "wind":
-        return {
-          ...state,
-          windDate: 1,
-        };
-      default:
-        return { ...state };
+      }
     }
-  }
-  if (action.type === "WINDGLOBAL") {
-    if (!action.payLoad) {
-      return {
-        ...state,
-        wind: true,
-        scaleType: "model",
-      };
-    } else {
-      return {
-        ...state,
-        wind: false,
-        scaleType: "model",
-      };
+    case "WINDNORDESTE": {
+      if (!action.payLoad) {
+        return {
+          ...state,
+          windNordeste: true,
+        };
+      } else {
+        return {
+          ...state,
+          windNordeste: false,
+        };
+      }
     }
-  }
-  if (action.type === "SATELLITE") {
-    if (!action.payLoad) {
-      return {
-        ...state,
-        satellite: true,
-        scaleType: "redemet",
-      };
-    } else {
-      return {
-        ...state,
-        satellite: false,
-        scaleType: "redemet",
-      };
-    }
-  }
-  if (action.type === "TOGGLEPRECIPITATION") {
-    if (!action.payLoad) {
-      return {
-        ...state,
-        precipitationMenu: true,
-        scaleType: "model",
-      };
-    } else {
-      return {
-        ...state,
-        precipitationMenu: false,
-        scaleType: "model",
-      };
-    }
-  }
-  if (action.type === "CHANGEDATE") {
-    switch (action.menuType) {
-      case "radar":
-        return {
-          ...state,
-          radarDate: action.payLoad,
-        };
-      case "satellite":
-        return {
-          ...state,
-          satelliteDate: action.payLoad,
-        };
-      case "wind":
-        return {
-          ...state,
-          windDate: action.payLoad,
-        };
-      case "temp":
-        return {
-          ...state,
-          tempDate: action.payLoad,
-        };
-      default:
-        return {
-          ...state,
-        };
-    }
-  }
-  if (action.type === "PLAY") {
-    switch (action.menuType) {
-      case "radar":
-        if (!action.payLoad) {
+
+    // Função que no estado playing altera a data de sua respectiva layer
+    case "PLUSDATE": {
+      switch (action.menuType) {
+        case "radar":
           return {
             ...state,
-            radarPlaying: true,
+            radarDate: action.payLoad + 1,
           };
-        } else {
+        case "satellite":
+          return {
+            ...state,
+            satelliteDate: action.payLoad + 1,
+          };
+        case "wind":
+          return {
+            ...state,
+            windDate: action.payLoad + 1,
+          };
+        case "temp":
+          return {
+            ...state,
+            tempDate: action.payLoad + 1,
+          };
+        case "ppt":
+          return {
+            ...state,
+            pptDate: action.payLoad + 1,
+          };
+        default:
+          return { ...state };
+      }
+    }
+    // Função que reseta a data de sua respectiva layer
+    case "RESETDATE": {
+      switch (action.menuType) {
+        case "radar":
+          return {
+            ...state,
+            radarDate: 1,
+          };
+        case "satellite":
+          return {
+            ...state,
+            satelliteDate: 1,
+          };
+        case "temp":
+          return {
+            ...state,
+            tempDate: 1,
+          };
+        case "ppt":
+          return {
+            ...state,
+            pptDate: 1,
+          };
+        case "wind":
+          return {
+            ...state,
+            windDate: 1,
+          };
+        default:
+          return { ...state };
+      }
+    }
+
+    // Função que altera a data através do menu de sua layer
+    case "CHANGEDATE": {
+      switch (action.menuType) {
+        case "radar":
           return {
             ...state,
             radarPlaying: false,
+            radarDate: action.payLoad,
           };
-        }
-      case "satellite":
-        if (!action.payLoad) {
-          return {
-            ...state,
-            satellitePlaying: true,
-          };
-        } else {
+        case "satellite":
           return {
             ...state,
             satellitePlaying: false,
+            satelliteDate: action.payLoad,
           };
-        }
-      case "temp":
-        if (!action.payLoad) {
-          return {
-            ...state,
-            tempPlaying: true,
-          };
-        } else {
-          return {
-            ...state,
-            tempPlaying: false,
-          };
-        }
-      case "wind":
-        if (!action.payLoad) {
-          return {
-            ...state,
-            windPlaying: true,
-          };
-        } else {
+        case "wind":
           return {
             ...state,
             windPlaying: false,
+            windDate: action.payLoad,
           };
-        }
-      case "ppt":
-        if (!action.payLoad) {
+        case "temp":
           return {
             ...state,
-            pptPlaying: true,
+            tempPlaying: false,
+            tempDate: action.payLoad,
           };
-        } else {
+        default:
           return {
             ...state,
-            pptPlaying: false,
           };
-        }
-      default:
-        return {
-          ...state,
-        };
+      }
     }
+    // Função que ativa/desativa o play do menu de sua layer
+    case "PLAY": {
+      switch (action.menuType) {
+        case "radar":
+          if (!action.payLoad) {
+            return {
+              ...state,
+              radarPlaying: true,
+            };
+          } else {
+            return {
+              ...state,
+              radarPlaying: false,
+            };
+          }
+        case "satellite":
+          if (!action.payLoad) {
+            return {
+              ...state,
+              satellitePlaying: true,
+            };
+          } else {
+            return {
+              ...state,
+              satellitePlaying: false,
+            };
+          }
+        case "temp":
+          if (!action.payLoad) {
+            return {
+              ...state,
+              tempPlaying: true,
+            };
+          } else {
+            return {
+              ...state,
+              tempPlaying: false,
+            };
+          }
+        case "wind":
+          if (!action.payLoad) {
+            return {
+              ...state,
+              windPlaying: true,
+            };
+          } else {
+            return {
+              ...state,
+              windPlaying: false,
+            };
+          }
+        case "ppt":
+          if (!action.payLoad) {
+            return {
+              ...state,
+              pptPlaying: true,
+            };
+          } else {
+            return {
+              ...state,
+              pptPlaying: false,
+            };
+          }
+        default:
+          return {
+            ...state,
+          };
+      }
+    }
+    default:
+      return { ...state };
   }
-  return state;
 };
 
 export default reducer;

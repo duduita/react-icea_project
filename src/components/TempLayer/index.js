@@ -1,51 +1,20 @@
-import { useEffect } from "react";
-import { useLeafletContext } from "@react-leaflet/core";
-import * as L from "leaflet";
 import { connect } from "react-redux";
-import axios from "axios";
-import "leaflet-velocity";
 
-var velocityLayer = [];
-const TestWind = (props) => {
-  const context = useLeafletContext();
-  const container = context.map;
-  useEffect(() => {
-    if (props.windTest) {
-      const url = `data/testWind${props.date}.json`;
-      axios
-        .get(url)
-        .then((resp) => {
-          velocityLayer[0] = L.velocityLayer({
-            displayValues: true,
-            displayOptions: {
-              velocityType: "Wind",
-              displayPosition: "bottomleft",
-              displayEmptyString: "No wind data",
-            },
-            data: resp.data,
-            maxVelocity: 25,
-          });
-        })
-        .then(() => {
-          container.addLayer(velocityLayer[0]);
-        });
-    }
-    return () => {
-      if (container.hasLayer(velocityLayer[0]))
-        container.removeLayer(velocityLayer[0]);
-    };
-  });
+// Essa página não foi finalizada
+// Utilizar a mesma lógica das wind layers
+// No entanto, deve-se procurar alguma lib que faça análogo ao que as velocity layers fazem
+// Uma sugestão é a esri-leaflet (lib já utilizada para a Basemaplayer)
+// https://github.com/slutske22/react-esri-leaflet
 
+const TempLayer = (props) => {
+  if (props.temp) alert("Página em construção!");
   return null;
 };
 const mapStateToProps = (state) => {
   return {
-    windTest: state.windTest,
-    date: state.date,
+    temp: state.temp,
+    tempDate: state.tempDate,
   };
 };
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(TestWind);
+export default connect(mapStateToProps)(TempLayer);

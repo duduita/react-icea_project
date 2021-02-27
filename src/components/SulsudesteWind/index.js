@@ -11,7 +11,7 @@ const SulsudesteWind = (props) => {
   const container = context.map;
   useEffect(() => {
     if (props.windSulsudeste) {
-      const url = `data/globalWind${props.windDate}.json`;
+      const url = `data/sulsudesteWind/sulsudesteWind${props.windDate}.json`;
       axios
         .get(url)
         .then((resp) => {
@@ -23,8 +23,8 @@ const SulsudesteWind = (props) => {
               displayEmptyString: "No wind data",
             },
             data: resp.data,
-            velocityScale: 0.02, // modifier for particle animations, arbitrarily defaults to 0.005
-            maxVelocity: 5, // Look that
+            velocityScale: 0.005, // modifier for particle animations, arbitrarily defaults to 0.005
+            maxVelocity: 25, // Look that
           });
         })
         .then(() => {
