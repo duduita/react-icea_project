@@ -54,9 +54,9 @@ Também é muito importante entender o _useLeafletContext_, que foi uma das func
 
 Todas as requisições utilizaram a lib _axios_ que nada mais é do que um _fetch_, ou seja, ela faz a requisição a uma dada _url_ e recebe um _json_. Com isso, ela preenche as variáveis necessárias para a composição da _layer_, e após isso adiciona de acordo com a necessidade do cliente ao mapa. A única excessão, é para os radares, isso porque, cada _layer_ do radar é na verdade um conjunto de _layers_, é um _layerGroup_, o qual agrupa as imagens que recebe de todos os radares para aquela data, e após isso adiciona ao mapa o conjunto de _layers_, o _layerGroup_, como se fosse uma _layer_. Isso porque, ele herda os métodos _addLayer_ das layers. Para saber mais: https://leafletjs.com/reference-1.7.1.html#layergroup.
 
-## Nota e próximos p assos
+## Nota e próximos passos
 
-Foi desenvolvida toda a lógica baseada no _leaflet_ para as _wind layers_, _satelitte layers_ e _radar layers_. As camadas relativas à temperatura e precipitação, não foram concluídas à tempo para o projeto.
+Foi desenvolvida toda a lógica baseada no _leaflet_ para as _wind layers_, _satelitte layers_ e _radar layers_. As camadas relativas à temperatura e precipitação, não foram concluídas a tempo para o projeto.
 
 Para as _layers_ de temperatura e precipitação, basta utilizar da mesma lógica presente nas _wind layers_, no entanto, ao invés de se utilizar as _velocity layers_ (que dão o aspecto de movimento ao mapa), usar outro pluggin do _leaflet_. Uma sugestão, por exemplo, para as camadas de temperatura seria a _esri-leaflet_: https://github.com/slutske22/react-esri-leaflet.
 
