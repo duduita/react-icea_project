@@ -58,6 +58,10 @@ const Timeline = (props) => {
   );
 };
 
+// Mapeia os estados para propriedades (redux)
+const mapStateToProps = (state) => {
+  return {};
+};
 // Mapeia as funções para propriedades (redux)
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -68,4 +72,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 // Conecta o function component com o redux
-export default connect(mapDispatchToProps)(Timeline);
+export default connect(mapStateToProps, mapDispatchToProps)(Timeline);
