@@ -3,45 +3,53 @@ import { connect } from "react-redux";
 import "./styles.css";
 
 const Timeline = (props) => {
+  // Recebe como props.menuType o tipo de menu, assim, uma timeline é usada para todos menus
   return (
     <div class="timeline">
-      <table
-        className="table table-borderless"
-        style={{
-          width: `${props.scaleSize}%`,
-        }}
-      >
+      <table className="table table-borderless">
         <thead>
           <tr>
             <td
-              id="date-1"
+              id={`${props.menuType}Date-1`}
               className="date-item"
-              onClick={(e) => props.ChangeDate(1)}
+              onClick={(e) =>
+                props.CHANGEDATE({ date: 1, menuType: props.menuType })
+              }
             />
             <td
-              id="date-2"
+              id={`${props.menuType}Date-2`}
               className="date-item"
-              onClick={(e) => props.ChangeDate(2)}
+              onClick={(e) =>
+                props.CHANGEDATE({ date: 2, menuType: props.menuType })
+              }
             />
             <td
-              id="date-3"
+              id={`${props.menuType}Date-3`}
               className="date-item"
-              onClick={(e) => props.ChangeDate(3)}
+              onClick={(e) =>
+                props.CHANGEDATE({ date: 3, menuType: props.menuType })
+              }
             />
             <td
-              id="date-4"
+              id={`${props.menuType}Date-4`}
               className="date-item"
-              onClick={(e) => props.ChangeDate(4)}
+              onClick={(e) =>
+                props.CHANGEDATE({ date: 4, menuType: props.menuType })
+              }
             />
             <td
-              id="date-5"
+              id={`${props.menuType}Date-5`}
               className="date-item"
-              onClick={(e) => props.ChangeDate(5)}
+              onClick={(e) =>
+                props.CHANGEDATE({ date: 5, menuType: props.menuType })
+              }
             />
             <td
-              id="date-6"
+              id={`${props.menuType}Date-6`}
               className="date-item"
-              onClick={(e) => props.ChangeDate(6)}
+              onClick={(e) =>
+                props.CHANGEDATE({ date: 6, menuType: props.menuType })
+              }
             />
           </tr>
         </thead>
@@ -50,29 +58,14 @@ const Timeline = (props) => {
   );
 };
 
-// Mapeia os estados para propriedades (redux)
-const mapStateToProps = (state) => {
-  return {
-    date: state.date,
-    playing: state.playing,
-    scaleSize: state.scaleSize,
-  };
-};
-
 // Mapeia as funções para propriedades (redux)
 const mapDispatchToProps = (dispatch) => {
   return {
-    ChangeDate: (e) => {
-      dispatch({ type: "CHANGEDATE", payLoad: e });
-    },
-    Play: (e) => {
-      dispatch({ type: "PLAY", payLoad: e });
-    },
-    PlusDate: (e) => {
-      dispatch({ type: "PLUSDATE", payLoad: e });
+    CHANGEDATE: (e) => {
+      dispatch({ type: "CHANGEDATE", payLoad: e.date, menuType: e.menuType });
     },
   };
 };
 
 // Conecta o function component com o redux
-export default connect(mapStateToProps, mapDispatchToProps)(Timeline);
+export default connect(mapDispatchToProps)(Timeline);

@@ -1,0 +1,8 @@
+.menus {
+  display: flex;
+  flex-wrap: wrap;
+  bottom: 0px;
+  width: 100%;
+  position: absolute;
+  justify-content: center;
+}

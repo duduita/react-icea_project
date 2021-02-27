@@ -6,10 +6,11 @@
   -o-transition: 0.2s linear;
   transition: 0.2s linear;
   justify-content: center;
+  border-radius: 15px;
 }
 
 .date-item:hover {
-  background: #4c4949 !important;
+  background: #2066cc !important;
   color: #fff;
 }
 

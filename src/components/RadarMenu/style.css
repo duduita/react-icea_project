@@ -1,0 +1,36 @@
+.radar-menu {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.submenu {
+  display: flex;
+}
+
+.options {
+  background: #ebebeb;
+  border-radius: 15px;
+  margin-bottom: 5px;
+  opacity: 50%;
+  width: 40%;
+  z-index: 1000;
+  display: flex;
+}
+
+.slider {
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 80%;
+}
+
+.info {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.radar-icon {
+  height: 30px;
+  width: 30px;
+}

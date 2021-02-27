@@ -5,17 +5,17 @@ import { connect } from "react-redux";
 import axios from "axios";
 import "leaflet-velocity";
 
-var velocityLayer = [];
-const TestWind = (props) => {
+let velocityLayer;
+const SulsudesteWind = (props) => {
   const context = useLeafletContext();
   const container = context.map;
   useEffect(() => {
-    if (props.windTest) {
-      const url = `data/testWind${props.date}.json`;
+    if (props.windSulsudeste) {
+      const url = `data/sulsudesteWind/sulsudesteWind${props.windDate}.json`;
       axios
         .get(url)
         .then((resp) => {
-          velocityLayer[0] = L.velocityLayer({
+          velocityLayer = L.velocityLayer({
             displayValues: true,
             displayOptions: {
               velocityType: "Wind",
@@ -23,16 +23,17 @@ const TestWind = (props) => {
               displayEmptyString: "No wind data",
             },
             data: resp.data,
-            maxVelocity: 25,
+            velocityScale: 0.005, // modifier for particle animations, arbitrarily defaults to 0.005
+            maxVelocity: 25, // Look that
           });
         })
         .then(() => {
-          container.addLayer(velocityLayer[0]);
+          container.addLayer(velocityLayer);
         });
     }
     return () => {
-      if (container.hasLayer(velocityLayer[0]))
-        container.removeLayer(velocityLayer[0]);
+      if (container.hasLayer(velocityLayer))
+        container.removeLayer(velocityLayer);
     };
   });
 
@@ -40,12 +41,12 @@ const TestWind = (props) => {
 };
 const mapStateToProps = (state) => {
   return {
-    windTest: state.windTest,
-    date: state.date,
+    windSulsudeste: state.windSulsudeste,
+    windDate: state.windDate,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TestWind);
+export default connect(mapStateToProps, mapDispatchToProps)(SulsudesteWind);

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+// Componente simples (botões do dropdown do VerticalMenu)
 export class ButtonWithIcon extends Component {
   render() {
     return (

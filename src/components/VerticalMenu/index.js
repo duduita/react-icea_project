@@ -14,8 +14,9 @@ const VerticalMenu = (props) => {
             className="icon"
             id="temperature"
             name="Temperatura"
+            onClick={(e) => props.ActiveTemp(props.temp)}
             src="assets/sun.svg"
-          />{" "}
+          />
           <ButtonWithIcon
             alt="satellite"
             className="icon"
@@ -44,22 +45,32 @@ const VerticalMenu = (props) => {
             {props.windMenu ? (
               <ul>
                 <ButtonWithIcon
-                  alt="globe"
+                  alt="nordeste"
                   className="small-icon"
-                  id="globe"
-                  name="Globo"
+                  id="nordeste"
+                  name=" Nordeste"
                   onClick={(e) => {
-                    props.WindGlobal(props.windGlobal);
+                    props.WindNordeste(props.windNordeste);
                   }}
                   src="assets/wind.svg"
                 />
                 <ButtonWithIcon
-                  alt="australia"
+                  alt="norte"
                   className="small-icon"
-                  id="australia"
-                  name="Teste"
+                  id="norte"
+                  name=" Norte"
                   onClick={(e) => {
-                    props.WindTest(props.windTest);
+                    props.WindNorte(props.windNorte);
+                  }}
+                  src="assets/wind.svg"
+                />
+                <ButtonWithIcon
+                  alt="sul-sudeste"
+                  className="small-icon"
+                  id="sul-sudeste"
+                  name=" Sul / Sudeste"
+                  onClick={(e) => {
+                    props.WindSulsudeste(props.windSulsudeste);
                   }}
                   src="assets/wind.svg"
                 />
@@ -73,12 +84,7 @@ const VerticalMenu = (props) => {
                 props.TogglePrecipitation(props.precipitationMenu)
               }
             >
-              {" "}
-              <img
-                className="icon"
-                alt="precipitation"
-                src="assets/rain.svg"
-              />{" "}
+              <img className="icon" alt="precipitation" src="assets/rain.svg" />
               Precipitação
             </a>
             {props.precipitationMenu ? (
@@ -98,9 +104,9 @@ const VerticalMenu = (props) => {
                   src="assets/wi-raindrop.svg"
                 />
                 <ButtonWithIcon
-                  alt="australia"
+                  alt="indefinido"
                   className="icon"
-                  id="australia"
+                  id="indefinido"
                   name="Precipitação Convectiva"
                   src="assets/wi-raindrop.svg"
                 />
@@ -115,11 +121,14 @@ const VerticalMenu = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    windMenu: state.windMenu,
-    windGlobal: state.windGlobal,
-    satellite: state.satellite,
-    radar: state.radar,
     precipitationMenu: state.precipitationMenu,
+    radar: state.radar,
+    satellite: state.satellite,
+    temp: state.temp,
+    windMenu: state.windMenu,
+    windNordeste: state.windNordeste,
+    windSulsudeste: state.windSulsudeste,
+    windNorte: state.windNorte,
   };
 };
 
@@ -128,20 +137,26 @@ const mapDispatchToProps = (dispatch) => {
     ToggleWind: (e) => {
       dispatch({ type: "TOGGLEWIND", payLoad: e });
     },
+    TogglePrecipitation: (e) => {
+      dispatch({ type: "TOGGLEPRECIPITATION", payLoad: e });
+    },
     ActiveSatellite: (e) => {
       dispatch({ type: "SATELLITE", payLoad: e });
+    },
+    ActiveTemp: (e) => {
+      dispatch({ type: "TEMP", payLoad: e });
     },
     ActiveRadar: (e) => {
       dispatch({ type: "RADAR", payLoad: e });
     },
-    TogglePrecipitation: (e) => {
-      dispatch({ type: "TOGGLEPRECIPITATION", payLoad: e });
+    WindNordeste: (e) => {
+      dispatch({ type: "WINDNORDESTE", payLoad: e });
     },
-    WindGlobal: (e) => {
-      dispatch({ type: "WINDGLOBAL", payLoad: e });
+    WindNorte: (e) => {
+      dispatch({ type: "WINDNORTE", payLoad: e });
     },
-    WindTest: (e) => {
-      dispatch({ type: "WINDTEST", payLoad: e });
+    WindSulsudeste: (e) => {
+      dispatch({ type: "WINDSULSUDESTE", payLoad: e });
     },
   };
 };
